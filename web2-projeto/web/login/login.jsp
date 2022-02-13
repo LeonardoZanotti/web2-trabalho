@@ -30,7 +30,6 @@
                 <input type="submit" class="fadeIn fourth" value="Log In">
               </form>
 
-              <!-- Remind Passowrd -->
               <div id="formFooter">
                  Não possui conta?
                 <a class="underlineHover" href="../register/register.jsp">Registre-se!</a>
