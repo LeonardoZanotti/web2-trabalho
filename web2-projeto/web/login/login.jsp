@@ -32,7 +32,7 @@
                 </div>
 
                 <div class="buttons">
-                    <p>Não possui conta? <a href="">Registre-se!</a></p>
+                    <p>Não possui conta? <a href="../register/register.jsp">Registre-se!</a></p>
                     <button class="btn btn-primary" type="submit">Login</button>
                 </div>
             </div>
