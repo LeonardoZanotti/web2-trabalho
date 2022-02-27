@@ -139,7 +139,7 @@ body:before {
 }
 
 .logo{
-  margin-left: 15px;
+    margin-right: 15px;
   width: 100%;
 }
 
@@ -160,5 +160,8 @@ body:before {
 .table, th, td, tr {
   border: 2px solid #1d2031;
   margin-top: 50px;
-  
+}
+
+a, p {
+    font-size: 23px;
 }

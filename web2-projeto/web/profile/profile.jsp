@@ -5,182 +5,60 @@
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-<!doctype html>
-<html lang="pt">
- <head>
-    <meta charset="UTF-8"/>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Perfil</title>
-    <link rel="stylesheet" href="./profile.css">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
- </head>
- <body>
-     <div class="wrapper page-extra">
-          <nav class="top-section navbar">
-               <div class="logo">
-                    <h1>Cadastro</h1>
-               </div>
-          </nav>
-          <div class="container">
-               <div class="row login ">
-                    <div class="col-md-12"> 
-                         <br><h1>Meus Dados</h1><br>
-                           <form id="form-register" class="form form-register shadow-lg p-3 mb-5 bg-body rounded" method="post" action="#"> 
-                              <input type="hidden" name="entity" value="individual"> 
-                              <div class="form-content"> 
-                                   <div class="row"> 
-                                        <div class="col-12"> 
-                                             <div class="form-group form-group-first_name"> 
-                                                  <label for="first_name">Nome Completo</label> 
-                                                  <input type="text" class="form-control form-control-blur" id="first_name" name="first_name" required="required"  minlength="2" value=""> 
-                                             </div> 
-                                        </div>
-                                   </div> 
-                                   <div class="row">
-                                    <div class="col-12"> 
-                                        <div class="form-group form-group-email"> 
-                                             <label for="email">E-mail</label>
-                                              <input type="email" class="form-control form-control-blur" id="email" name="email" required="required" value=""> 
-                                         </div> 
-                                    </div>
-                               </div>
-                              <div class="form-individual"> 
-                                   <div class="row"> 
-                                        <div class="col-sm-6"> 
-                                             <div class="form-group form-group-birthday"> 
-                                                  <label for="birthday">Data de nascimento</label>
-                                                   <input type="Date" class="form-control form-control-blur" id="birthday" name="birthday" data-mask="00/00/0000"  value="" required="required" maxlength="10"> 
-                                              </div> 
-                                        </div>  
-                                        <div class="col-sm-6 form-individual"> 
-                                             <div class="form-group form-group-cpf"> 
-                                                  <label for="cpf">CPF</label> 
-                                                  <input type="text" class="form-control form-control-blur" id="cpf" name="cpf" required="required" data-mask="000.000.000-00" value="" maxlength="14"> 
-                                             </div> 
-                                        </div>    
-                                   </div> 
-                              </div> 
-                                      <div class="row"> 
-                                        <div class="col-sm-6"> 
-                                             <div class="form-group form-group-phone"> 
-                                                  <label for="phone">Telefone 1</label> 
-                                                  <input type="tel" class="form-control form-control-blur" id="phone" name="phone" required="required" data-mask="(00) 00000-0009" value="" minlength="8" maxlength="15"> 
-                                             </div> 
-                                        </div> 
-                                        <div class="col-sm-6"> 
-                                             <div class="form-group form-group-phone"> 
-                                                  <label for="phone">Telefone 2</label> 
-                                                  <input type="tel" class="form-control form-control-blur" id="phone" name="phone" required="" data-mask="(00) 00000-0009" value="" minlength="8" maxlength="15"> 
-                                             </div> 
-                                        </div> 
-                                   </div> 
-                                    <div class="row"> 
-                                        <div class="col-sm-6"> 
-                                             <div class="form-group form-group-phone"> 
-                                                  <label for="text">Logradouro</label> 
-                                                  <input type="text" class="form-control form-control-blur" id="street" name="street" required="required"  value="" minlength="8" maxlength="15"> 
-                                             </div> 
-                                        </div> 
-                                        <div class="col-sm-6"> 
-                                             <div class="form-group form-group-number"> 
-                                                  <label for="number">Número</label> 
-                                                  <input type="number" class="form-control form-control-blur" id="number" name="number" required="" value="" minlength="8" maxlength="15"> 
-                                             </div> 
-                                        </div> 
-                                   </div> 
-                                   <div class="row"> 
-                                        <div class="col-sm-6"> 
-                                             <div class="form-group form-group-cep"> 
-                                                  <label for="text">Cep</label> 
-                                                  <input type="text" class="form-control form-control-blur" id="cep" name="cep" required="required" data-mask="00.000-000" value="" minlength="8" maxlength="15"> 
-                                             </div> 
-                                        </div> 
-                                        <div class="col-sm-6"> 
-                                             <div class="form-group form-group-Neigborhood"> 
-                                                  <label for="Neigborhood">Bairro</label> 
-                                                  <input type="text" class="form-control form-control-blur" id="Neigborhood" name="Neigborhood" required="" value="" minlength="8" maxlength="15"> 
-                                             </div> 
-                                        </div> 
-                                   </div> 
-                                   <div class="row"> 
-                                        <div class="col-sm-6"> 
-                                             <div class="form-group form-group-est"> 
-                                                  <label for="text">Estado</label> 
-                                                  <select class="custom-select custom-select-blur" id="est" name="est" required="required"> 
-                                                       <option value="" disabled="" selected="">Selecione...</option>
-                                                       <option value="acre">Acre</option> 
-                                                       <option value="alagoas">Alagoas</option>
-                                                       <option value="amapá">Amapá</option> 
-                                                       <option value="amazonas">Amazonas</option>
-                                                       <option value="bahia">Bahia</option> 
-                                                       <option value="ceara">Ceará</option>
-                                                       <option value="distrito-federal">Distrito Federal</option> 
-                                                       <option value="espirito-santo">Espírito Santo</option>
-                                                       <option value="goias">Goiás</option> 
-                                                       <option value="maranhao">Maranhão</option>
-                                                       <option value="mato-grosso">Mato Grosso</option> 
-                                                       <option value="mato-grosso-do-sul">Mato Grosso do Sul</option>
-                                                       <option value="minas-gerais">Minas Gearais</option> 
-                                                       <option value="para">Pará</option>
-                                                       <option value="paraiba">Paraíba</option> 
-                                                       <option value="parana">Paraná</option>
-                                                       <option value="pernambuco">Pernambuco</option> 
-                                                       <option value="piaui">Piauí</option>
-                                                       <option value="rio-de-janeiro">Rio de Janeiro</option> 
-                                                       <option value="rio-grande-do-norte">Rio Grande do Norte</option>
-                                                       <option value="rio-grande-do-sul">Rio Grande do Sul</option> 
-                                                       <option value="rondônia">Rondônia</option>
-                                                       <option value="roraima">Roraima</option> 
-                                                       <option value="santa-catarina">Santa Catarina</option>
-                                                       <option value="sao-paulo">São Paulo</option> 
-                                                       <option value="sergipe">Sergipe</option>
-                                                       <option value="tocantins">Tocantins</option> 
-                                                  </select>
-                                             </div> 
-                                        </div> 
-                                        <div class="col-sm-6"> 
-                                             <div class="form-group form-group-cities"> 
-                                                  <label for="text">Cidade</label> 
-                                                  <select class="custom-select custom-select-blur" id="city" name="city" required="required"> 
-                                                       <option value="" disabled="" selected="">Selecione...</option>
-                                                      
-                                                  </select>
-                                             </div> 
-                                        </div> 
-                                   </div> 
-                                   <div class="row"> 
-                                        <div class="col-sm-6"> 
-                                             <div class="form-group form-group-cep"> 
-                                                  <label for="password">Senha</label> 
-                                                  <input type="password" class="form-control form-control-blur" id="password" name="password" required="required" value="" minlength="8" maxlength="15"> 
-                                             </div> 
-                                        </div> 
-                                   </div> 
-                                   <br>
-                                   <div class="row"> 
-                                           <div class="col-sm-3"> 
-                                             <a href="portal-cliente.html"
-                                                  <button type="submit" class="btn btn-secondary btn-lg btn-block"> Voltar </button>
-                                             </a> 
-                                        </div> 
-                                        <div class="col-sm-3"> 
-                                             <a href="#">
-                                                  <button type="submit" class="btn btn-info btn-lg btn-block"> Editar </button> 
-                                             </a>
-                                        </div> 
-                                        <div class="col-sm-3">   
-                                        </div> 
-                                        <div class="col-sm-3" style="text-align: right;"> 
-                                             <a href="#">
-                                                  <button type="submit" class="btn btn-success btn-lg btn-block"> Salvar </button>
-                                             </a> 
-                                        </div> 
-                                   </div> 
-                              </div> 
-                         </div> 
-                    </form>
-               </div>          
-          </div>
-     </div>
-  </body>
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <title>Perfil</title>
+        <link rel="stylesheet" href="./profile.css">
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+    </head>
+    <body>
+        <nav class="top-section navbar">
+            <div class="logo d-flex align-items-center justify-content-between">
+                <div class="logo d-flex align-items-center">
+                    <img src="../img/coroa-logo.png" icons/placeholder.svg width="80px" background="#777" color="#777" text=" " title=" " >
+                    <p class="mt-3">Perfil</p>
+                </div>
+                <a class="logout-btn" href="../login/login.jsp">Logout</a>
+           </div>
+        </nav>
+        <div class="container rounded bg-white mt-5 mb-5">
+            <div class="row">
+                <div class="col-md-3 border-right">
+                    <div class="d-flex flex-column align-items-center text-center p-3 py-5"><img class="rounded-circle mt-5" width="150px" src="https://st3.depositphotos.com/15648834/17930/v/600/depositphotos_179308454-stock-illustration-unknown-person-silhouette-glasses-profile.jpg"><span class="font-weight-bold">Edogaru</span><span class="text-black-50">edogaru@mail.com.my</span><span> </span></div>
+                </div>
+                <div class="col-md-5 border-right">
+                    <div class="p-3 py-5">
+                        <div class="d-flex justify-content-between align-items-center mb-3">
+                            <h4 class="text-right">Editar perfil</h4>
+                        </div>
+                        <div class="row mt-2">
+                            <div class="col-md-12"><label class="labels">Nome completo</label><input type="text" class="form-control" placeholder="Nome completo" value=""></div>
+                        </div>
+                        <div class="row mt-3">
+                            <div class="col-md-12"><label class="labels">E-mail</label><input type="text" class="form-control" placeholder="E-mail" value=""></div>
+                            <div class="col-md-12"><label class="labels">Telefone</label><input type="text" class="form-control" placeholder="Telefone" value=""></div>
+                            <div class="col-md-12"><label class="labels">CPF</label><input type="text" class="form-control" placeholder="CPF" value=""></div>
+                            <div class="col-md-10"><label class="labels">Endereço</label><input type="text" class="form-control" placeholder="Endereço" value=""></div>
+                            <div class="col-md-2"><label class="labels">Número</label><input type="number" class="form-control" placeholder="000" value=""></div>
+                            <div class="col-md-12"><label class="labels">Complemento</label><input type="text" class="form-control" placeholder="Complemento" value=""></div>
+                            <div class="col-md-12"><label class="labels">CEP</label><input type="text" class="form-control" placeholder="CEP" value=""></div>
+                            <div class="col-md-6"><label class="labels">Estado</label><input type="text" class="form-control" placeholder="Estado" value=""></div>
+                            <div class="col-md-6"><label class="labels">Cidade</label><input type="text" class="form-control" value="" placeholder="Cidade"></div>
+                            <div class="col-md-12"><label class="labels">Bairro</label><input type="text" class="form-control" placeholder="Bairro" value=""></div>
+                        </div>
+                        <div class="mt-5 text-center"><button class="btn btn-primary profile-button" type="button">Save Profile</button></div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="p-3 py-5">
+                        <div class="d-flex justify-content-between align-items-center experience"><span>Alterar senha</span></div><br>
+                        <div class="col-md-12"><label class="labels">Senha</label><input type="password" class="form-control" placeholder="Senha" value=""></div> <br>
+                        <div class="col-md-12"><label class="labels">Confirmar senha</label><input type="password" class="form-control" placeholder="Confirmar senha" value=""></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </body>
 </html>
