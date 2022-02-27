@@ -59,7 +59,7 @@
                               </div>
                             </div>
 
-                            <div class="form-check d-flex justify-content-center mb-5">
+                            <div class="form-check d-flex justify-content-center mb-2">
                               <input
                                 class="form-check-input me-2"
                                 type="checkbox"
@@ -70,9 +70,11 @@
                                 Eu aceito os <a href="#!">Termos de serviço</a>
                               </label>
                             </div>
-
-                            <div class="d-flex justify-content-center mx-4 mb-3 mb-lg-4">
-                              <button type="button" class="btn btn-primary btn-lg">Registrar</button>
+                              
+                            <div class="justify-content-center d-flex my-4">
+                                <a href="../home/home.jsp" type="button" class="btn btn-primary btn-lg">
+                                    Registrar
+                                </a>
                             </div>
 
                             <div class="d-flex justify-content-center mx-4 mb-3 mb-lg-4">

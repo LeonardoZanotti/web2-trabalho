@@ -140,10 +140,21 @@ body:before {
 
 .logo{
   margin-left: 15px;
+  width: 100%;
 }
 
 .login{
   margin: auto;
+}
+
+.logout-btn {
+    color: white;
+    text-decoration: none; /* no underline */
+}
+
+.logout-btn:hover {
+    color: gray;
+    text-decoration: none;
 }
 
 .table, th, td, tr {

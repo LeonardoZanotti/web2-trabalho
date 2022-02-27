@@ -27,7 +27,7 @@
               <form>
                 <input type="text" id="login" class="fadeIn second" name="login" placeholder="Login">
                 <input type="text" id="password" class="fadeIn third" name="login" placeholder="Senha">
-                <input type="submit" class="fadeIn fourth" value="Log In">
+                <a href="../home/home.jsp" class="fadeIn fourth"><div type="submit" class="fadeIn fourth btn-submit">Login</div></a>
               </form>
 
               <div id="formFooter">
