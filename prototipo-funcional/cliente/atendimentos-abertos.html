@@ -1,26 +1,62 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="pt">
- <head>
-     <meta charset="UTF-8"/>
-      <meta name="viewport" content="width=device-width, initial-scale=1.0">
-     <title>Página de Login</title>
-     <link rel="stylesheet" type="text/css" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
-     <link rel="stylesheet" type="text/css" href="../style.css">
- </head>
- <body>
-     <div class="wrapper page-extra">
-          <nav class="top-section navbar">
-               <div class="logo">
-                    <img src="../imagens/coroa-logo.png" icons/placeholder.svg width="25%" height="25%" background="#777" color="#777" text=" " title=" " >
-               </div>
-          </nav>
-          <div class="container">
-               <div class="row login">
-                    <div class="col-md-12"> 
-                         <br><h1>Histórico de Atendimentos</h1>
-                    </div>
-               </div>          
-          </div>
-     </div>
- </body>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Página de Login</title>
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+    />
+    <link rel="stylesheet" type="text/css" href="../style.css" />
+  </head>
+  <body>
+    <nav class="top-section navbar">
+      <div class="logo">
+        <img
+          src="../imagens/coroa-logo.png"
+          width="25%"
+          height="25%"
+          background="#777"
+          color="#777"
+          text=" "
+          title=" "
+        />
+      </div>
+    </nav>
+    <div class="container">
+      <div class="">
+        <div class="col-md-12">
+          <br />
+          <h1>Histórico de Atendimentos</h1>
+          <table class="table" style="max-width: 100%">
+            <thead>
+              <tr>
+                <th scope="col">#</th>
+                <th scope="col">Cliente</th>
+                <th scope="col">Tipo</th>
+                <th scope="col">Reclamação</th>
+                <th scope="col">Situação</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <th scope="row">1</th>
+                <td>Brendon</td>
+                <td>Reclamação</td>
+                <td class="text-truncate">
+                  Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                  Maecenas eget nisl id libero tincidunt sodales. Pellentesque
+                  habitant morbi tristique senectus et netus et malesuada fames
+                  ac turpis egestas.
+                </td>
+                <td>Aberto</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </body>
 </html>
