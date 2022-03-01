@@ -1,11 +1,11 @@
-body.login a {
+a {
   color: #92badd;
   display:inline-block;
   text-decoration: none;
   font-weight: 400;
 }
 
-body.login h2 {
+h2 {
   text-align: center;
   font-size: 16px;
   font-weight: 600;
@@ -19,7 +19,7 @@ body.login h2 {
 
 /* STRUCTURE */
 
-body.login .wrapper {
+.wrapper {
   display: flex;
   align-items: center;
   flex-direction: column; 
@@ -29,7 +29,7 @@ body.login .wrapper {
   padding: 20px;
 }
 
-body.login #formContent {
+#formContent {
   -webkit-border-radius: 10px 10px 10px 10px;
   border-radius: 10px 10px 10px 10px;
   background: #fff;
@@ -43,7 +43,7 @@ body.login #formContent {
   text-align: center;
 }
 
-body.login #formFooter {
+#formFooter {
   background-color: #f6f6f6;
   border-top: 1px solid #dce8f1;
   padding: 25px;
@@ -56,11 +56,11 @@ body.login #formFooter {
 
 /* TABS */
 
-body.login h2.inactive {
+h2.inactive {
   color: #cccccc;
 }
 
-body.login h2.active {
+h2.active {
   color: #0d0d0d;
   border-bottom: 2px solid #5fbae9;
 }
@@ -69,7 +69,7 @@ body.login h2.active {
 
 /* FORM TYPOGRAPHY*/
 
-body.login input[type=button], body.login input[type=submit],body.login input[type=reset]  {
+input[type=button], input[type=submit],input[type=reset]  {
   background-color: #56baed;
   border: none;
   color: white;
@@ -91,11 +91,11 @@ body.login input[type=button], body.login input[type=submit],body.login input[ty
   transition: all 0.3s ease-in-out;
 }
 
-body.login input[type=button]:hover, body.login input[type=submit]:hover, body.login input[type=reset]:hover  {
+input[type=button]:hover, input[type=submit]:hover, input[type=reset]:hover  {
   background-color: #39ace7;
 }
 
-body.login input[type=button]:active,body.login input[type=submit]:active,body.login input[type=reset]:active  {
+input[type=button]:active,input[type=submit]:active,input[type=reset]:active  {
   -moz-transform: scale(0.95);
   -webkit-transform: scale(0.95);
   -o-transform: scale(0.95);
@@ -103,7 +103,7 @@ body.login input[type=button]:active,body.login input[type=submit]:active,body.l
   transform: scale(0.95);
 }
 
-body.login input[type=text] {
+input[type=text] {
   background-color: #f6f6f6;
   border: none;
   color: #0d0d0d;
@@ -124,12 +124,12 @@ body.login input[type=text] {
   border-radius: 5px 5px 5px 5px;
 }
 
-body.login input[type=text]:focus {
+input[type=text]:focus {
   background-color: #fff;
   border-bottom: 2px solid #5fbae9;
 }
 
-body.login input[type=text]:placeholder {
+input[type=text]:placeholder {
   color: #cccccc;
 }
 
@@ -138,7 +138,7 @@ body.login input[type=text]:placeholder {
 /* ANIMATIONS */
 
 /* Simple CSS3 Fade-in-down Animation */
-body.login .fadeInDown {
+.fadeInDown {
   -webkit-animation-name: fadeInDown;
   animation-name: fadeInDown;
   -webkit-animation-duration: 1s;
@@ -178,7 +178,7 @@ body.login .fadeInDown {
 @-moz-keyframes fadeIn { from { opacity:0; } to { opacity:1; } }
 @keyframes fadeIn { from { opacity:0; } to { opacity:1; } }
 
-body.login .fadeIn {
+.fadeIn {
   opacity:0;
   -webkit-animation:fadeIn ease-in 1;
   -moz-animation:fadeIn ease-in 1;
@@ -193,32 +193,32 @@ body.login .fadeIn {
   animation-duration:1s;
 }
 
-body.login .fadeIn.first {
+.fadeIn.first {
   -webkit-animation-delay: 0.4s;
   -moz-animation-delay: 0.4s;
   animation-delay: 0.4s;
 }
 
-body.login .fadeIn.second {
+.fadeIn.second {
   -webkit-animation-delay: 0.6s;
   -moz-animation-delay: 0.6s;
   animation-delay: 0.6s;
 }
 
-body.login .fadeIn.third {
+.fadeIn.third {
   -webkit-animation-delay: 0.8s;
   -moz-animation-delay: 0.8s;
   animation-delay: 0.8s;
 }
 
-body.login .fadeIn.fourth {
+.fadeIn.fourth {
   -webkit-animation-delay: 1s;
   -moz-animation-delay: 1s;
   animation-delay: 1s;
 }
 
 /* Simple CSS3 Fade-in Animation */
-body.login .underlineHover:after {
+.underlineHover:after {
   display: block;
   left: 0;
   bottom: -10px;
@@ -229,11 +229,11 @@ body.login .underlineHover:after {
   transition: width 0.2s;
 }
 
-body.login .underlineHover:hover {
+.underlineHover:hover {
   color: #0d0d0d;
 }
 
-body.login .underlineHover:hover:after{
+.underlineHover:hover:after{
   width: 100%;
 }
 
@@ -241,10 +241,10 @@ body.login .underlineHover:hover:after{
 
 /* OTHERS */
 
-body.login *:focus {
+*:focus {
     outline: none;
 } 
 
-body.login #icon {
+#icon {
   width:60%;
 }
