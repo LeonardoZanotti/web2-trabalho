@@ -7,34 +7,6 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/CascadeStyleSheet.css
     Author     : jessg
 */
 
-
-body {
-  display: block;
-  align-items: center;
-  justify-content: center;
-  flex-direction: column;
-  position: relative;
-  font-family: 'Roboto', helvetica, arial, sans-serif;
-  font-size: 1.5em;
-}
-body:before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  height: 100%;
-  width: 100%;
-  opacity: .3;
-}
-
-.wrapper{
-  min-height: 670px;
-}
-
-.page-extra{
-  background: white;
-}
-
 .login-form {
   width: 100%;
   padding: 2em;
@@ -51,17 +23,11 @@ body:before {
   margin: 50px auto;
 }
 
-
 @media screen and (min-width: 600px) {
   .login-form {
     width: 50vw;
     max-width: 15em;
   }
-}
-
-.flex-row {
-  display: flex;
-  margin-bottom: 1em;
 }
 
 .lf--label {
@@ -90,23 +56,23 @@ body:before {
   border: 0;
   color: #fff;
   cursor: pointer;
-  font-size: .75em;
+  font-size: 0.75em;
   font-weight: 600;
   text-shadow: 0 1px 0 rgba(0, 0, 0, 0.2);
 }
 .lf--submit:hover {
   outline: none;
-  transition: -webkit-transform .15s ease;
-  transition: transform .15s ease;
-  transition: transform .15s ease, -webkit-transform .15s ease;
+  transition: -webkit-transform 0.15s ease;
+  transition: transform 0.15s ease;
+  transition: transform 0.15s ease, -webkit-transform 0.15s ease;
   -webkit-transform: scale(1.1);
-          transform: scale(1.1);
+  transform: scale(1.1);
 }
 
 .lf--forgot {
   margin-top: 1em;
   color: #00d6b7;
-  font-size: .65em;
+  font-size: 0.65em;
   text-align: center;
   position: relative;
 }
@@ -127,27 +93,21 @@ body:before {
   color: #8f8f8f;
 }
 
-.top-section{
+.top-section {
   background: #1d2031;
   width: 100%;
   height: 80px;
   color: #f1f1f1;
 }
 
-.main-logo{
+.main-logo {
   fill: #fff;
 }
 
-.logo{
+.logo {
   margin-left: 15px;
 }
 
-.login{
+.login {
   margin: auto;
-}
-
-.table, th, td, tr {
-  border: 2px solid #1d2031;
-  margin-top: 50px;
-  
 }
