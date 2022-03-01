@@ -10,6 +10,7 @@
       href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
     />
     <link rel="stylesheet" type="text/css" href="../style.css" />
+    <link rel="stylesheet" type="text/css" href="./atendimentos-abertos.css" />
   </head>
   <body>
     <nav class="top-section navbar">
@@ -27,16 +28,16 @@
     </nav>
     <div class="container">
       <div class="">
-        <div class="col-md-12">
-          <br />
+        <div class="col-md-12 mt-4">
           <h1>Histórico de Atendimentos</h1>
-          <table class="table" style="max-width: 100%">
+          <table class="table mt-4" style="max-width: 100%">
             <thead>
               <tr>
                 <th scope="col">#</th>
                 <th scope="col">Cliente</th>
                 <th scope="col">Tipo</th>
                 <th scope="col">Reclamação</th>
+                <th scope="col">Abertura</th>
                 <th scope="col">Situação</th>
               </tr>
             </thead>
@@ -45,13 +46,38 @@
                 <th scope="row">1</th>
                 <td>Brendon</td>
                 <td>Reclamação</td>
-                <td class="text-truncate">
+                <td class="text-truncate" style="max-width: 100px;">
                   Lorem ipsum dolor sit amet, consectetur adipiscing elit.
                   Maecenas eget nisl id libero tincidunt sodales. Pellentesque
                   habitant morbi tristique senectus et netus et malesuada fames
                   ac turpis egestas.
                 </td>
-                <td>Aberto</td>
+                <td>
+                  12:30 - 12/02
+                </td>
+                <td class="ticket-status open">
+                  Aberto
+                </td>
+              </tr>
+              <tr>
+                <th scope="row">1</th>
+                <td>Brendon</td>
+                <td>Reclamação</td>
+                <td class="text-truncate" style="max-width: 100px;">
+                  Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                  Maecenas eget nisl id libero tincidunt sodales. Pellentesque
+                  habitant morbi tristique senectus et netus et malesuada fames
+                  ac turpis egestas.
+                </td>
+                <td>
+                  12:30 - 12/02
+                </td>
+                <td class="ticket-status closed">
+                  Fechado
+                  <svg xmlns="http://www.w3.org/2000/svg" class="ticket-status-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                  </svg>
+                </td>
               </tr>
             </tbody>
           </table>
