@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="pt">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Cadastro de Produtos</title>
+    <link rel="stylesheet" type="text/css" href="../assets/styles/index.css" />
+  </head>
+  <body>
+    <nav class="top-section navbar">
+      <div class="logo">
+        <img
+          src="../assets/imagens/coroa-logo.png"
+          width="25%"
+          height="25%"
+          background="#777"
+          color="#777"
+          text=" "
+          title=" "
+        />
+      </div>
+    </nav>
+    <div class="container">
+      <div class="">
+        <div class="col-md-12 mt-4">
+          <h1>Cadastro de produtos</h1>
+           <form
+            class="needs-validation p-3 mb-5 bg-body rounded mt-4" 
+            novalidate
+            id="form-register" 
+            method="post"
+            action="#">
+             <div class="col-12 col-md-6">
+                <div class="form-group">
+                  <label for="produto-nome">Nome do produto:</label>
+                  <input 
+                  type="text" 
+                  id="produto-nome" 
+                  class="form-control" 
+                  name="nome" 
+                  required="required"
+                  >
+                  <div class="invalid-feedback">
+                    Por favor, informe o nome do produto.
+                  </div>
+                </div>
+                <div class="form-group">
+                   <label for="state">Categoria</label>
+                      <select
+                        class="custom-select custom-select-blur"
+                        id="est"
+                        name="est"
+                        required="required"
+                      >
+                          <option value="" disabled="" selected="">
+                            Selecione...
+                          </option>
+                          <option value="reclamacao">Batom</option>
+                          <option value="elogio">Loção Corporal</option>
+                          <option value="sugestao">Shampoo</option>
+                          <option value="outros">Máscara Facial</option>
+                      </select>
+                      <div class="invalid-feedback">
+                        Por favor, selecione uma opção válida.
+                      </div>
+                </div>
+                <div class="form-group">
+                  <label for="produto-nome">Peso:</label>
+                  <input 
+                  type="text" 
+                  id="produto-nome" 
+                  class="form-control" 
+                  name="nome" 
+                  required="required"
+                  >
+                  <div class="invalid-feedback">
+                    Por favor, informe o peso do produto.
+                  </div>
+                </div>
+                <div class="form-group" >
+                  <label for="desc-prod">Descrição:</label>
+                    <textarea 
+                      id="produto-desc" 
+                      class="form-control" 
+                      name="desc-prod" 
+                      rows="4" 
+                      required="required"
+                    >
+                  </textarea>
+                  <div class="invalid-feedback">
+                     Por favor, informe a descrição do produto.
+                  </div>
+                </div>
+            </div>
+          <!-- TODO: form -->
+        <div class="row">   
+          <div class="col-sm-9"></div>
+              <div class="col-sm-2" style="text-align: right">
+                  <button
+                    type="submit"
+                    class="btn btn-success btn-lg btn-block">
+                    Salvar
+                  </button>
+              </div>
+          </div>
+          <script>
+              // Exemplo de JavaScript inicial para desativar envios de formulário, se houver campos inválidos.
+              (function() {
+                'use strict';
+                window.addEventListener('load', function() {
+                  // Pega todos os formulários que nós queremos aplicar estilos de validação Bootstrap personalizados.
+                  var forms = document.getElementsByClassName('needs-validation');
+                  // Faz um loop neles e evita o envio
+                  var validation = Array.prototype.filter.call(forms, function(form) {
+                    form.addEventListener('submit', function(event) {
+                      if (form.checkValidity() === false) {
+                        event.preventDefault();
+                        event.stopPropagation();
+                      }
+                      form.classList.add('was-validated');
+                    }, false);
+                  });
+                }, false);
+              })();
+            </script>
+      </form>
+      </div>
+    </div>
+  </body>
+</html>
+

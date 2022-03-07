@@ -1,0 +1,19 @@
+.ticket-status {
+    color: white;
+}
+
+
+.ticket-status.open {
+    background-color: #bfa95a;
+}
+
+
+.ticket-status.closed {
+    background-color: #5cb85c;
+}
+
+.ticket-status .ticket-status-icon {
+    width: 1em;
+    height: 1em;
+
+}

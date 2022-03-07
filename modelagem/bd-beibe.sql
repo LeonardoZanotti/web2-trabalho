@@ -38,6 +38,7 @@ CREATE TABLE Pessoa (
     idEndereco INTEGER REFERENCES Endereco (idEndereco),
     primeiroNome VARCHAR (50) NOT NULL,
     sobreNome VARCHAR(50) NOT NULL,
+    dataNascimento DATE NOT NULL,
     cpf BIGINT NOT NULL,
     telefone1 VARCHAR (30) NOT NULL,
     telefone2 VARCHAR (30) 
@@ -85,7 +86,6 @@ CREATE TABLE Produto (
     nome VARCHAR (50) NOT NULL,
     descricao VARCHAR (50) NOT NULL,
     peso FLOAT NOT NULL,
-    quantidadeReclamacoes INTEGER NOT NULL
 );
 
 CREATE TABLE Atendimento (

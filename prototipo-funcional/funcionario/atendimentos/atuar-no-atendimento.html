@@ -3,14 +3,14 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Página de Login</title>
-    <link rel="stylesheet" type="text/css" href="/assets/styles/index.css" />
+    <title>Resolver Atendimento</title>
+    <link rel="stylesheet" type="text/css" href="../assets/styles/index.css" />
   </head>
   <body>
     <nav class="top-section navbar">
       <div class="logo">
         <img
-          src="/assets/imagens/coroa-logo.png"
+          src="../assets/imagens/coroa-logo.png"
           width="25%"
           height="25%"
           background="#777"
@@ -23,12 +23,145 @@
     <div class="container">
       <div class="">
         <div class="col-md-12 mt-4">
-          <h1>Atuar no atendimento</h1>
-          <h2>-</h2>
-
+          <h1>Atendimento #000</h1>
+           <form
+            class="needs-validation p-3 mb-5 bg-body rounded mt-4" 
+            novalidate
+            id="form-register" 
+            method="post"
+            action="#">
+             <div class="col-12 col-md-6">
+                <div class="form-group">
+                  <label for="produto-nome">Nome do Cliente</label>
+                  <input 
+                  type="text" 
+                  id="produto-nome" 
+                  class="form-control" 
+                  name="nome"
+                  > 
+                </div>
+                <div class="form-group">
+                   <label for="state">Produto</label>
+                      <select
+                        class="custom-select custom-select-blur"
+                        id="est"
+                        name="est"
+                        required="required"
+                      >
+                          <option value="" disabled="" selected="">
+                            Selecione...
+                          </option>
+                          <option value="reclamacao">Batom</option>
+                          <option value="elogio">Loção Corporal</option>
+                          <option value="sugestao">Shampoo</option>
+                          <option value="outros">Máscara Facial</option>
+                      </select>
+                      <div class="invalid-feedback">
+                        Por favor, selecione uma opção válida.
+                      </div>
+                </div>
+                <div class="form-group">
+                   <label for="state">Tipo do Atendimento</label>
+                      <select
+                        class="custom-select custom-select-blur"
+                        id="est"
+                        name="est"
+                        required="required"
+                      >
+                          <option value="" disabled="" selected="">
+                            Selecione...
+                          </option>
+                          <option value="reclamacao">Reclamação</option>
+                          <option value="elogio">Sugestão</option>
+                          <option value="sugestao">Dúvida</option>
+                          <option value="outros">Outros</option>
+                      </select>
+                      <div class="invalid-feedback">
+                        Por favor, selecione uma opção válida.
+                      </div>
+                </div>
+                <div class="form-group">
+                   <label for="state">Status do Atendimento</label>
+                      <select
+                        class="custom-select custom-select-blur"
+                        id="est"
+                        name="est"
+                        required="required"
+                      >
+                          <option value="" disabled="" selected="">
+                            Selecione...
+                          </option>
+                          <option value="reclamacao">Em aberto</option>
+                          <option value="sugestao">Em andamento</option>
+                          <option value="elogio">Fechado</option>
+                      </select>
+                      <div class="invalid-feedback">
+                        Por favor, selecione uma opção válida.
+                      </div>
+                </div>
+                <div class="form-group" >
+                  <label for="desc-chamado">Descrição do chamado:</label>
+                    <textarea 
+                      id="desc-chamado" 
+                      class="form-control" 
+                      name="desc-chamado" 
+                      rows="4" 
+                      required="required"
+                    >
+                  </textarea>
+                  <div class="invalid-feedback">
+                     Por favor, informe a resolução do produto.
+                  </div>
+                </div>
+                <div class="form-group" >
+                  <label for="desc-resol">Resolução:</label>
+                    <textarea 
+                      id="desc-resol" 
+                      class="form-control" 
+                      name="desc-resol" 
+                      rows="4" 
+                      required="required"
+                    >
+                  </textarea>
+                  <div class="invalid-feedback">
+                     Por favor, informe a resolução do produto.
+                  </div>
+                </div>
+            </div>
           <!-- TODO: form -->
-        </div>
+        <div class="row">   
+          <div class="col-sm-9"></div>
+              <div class="col-sm-2" style="text-align: right">
+                  <button
+                    type="submit"
+                    class="btn btn-success btn-lg btn-block">
+                    Salvar
+                  </button>
+              </div>
+          </div>
+          <script>
+              // Exemplo de JavaScript inicial para desativar envios de formulário, se houver campos inválidos.
+              (function() {
+                'use strict';
+                window.addEventListener('load', function() {
+                  // Pega todos os formulários que nós queremos aplicar estilos de validação Bootstrap personalizados.
+                  var forms = document.getElementsByClassName('needs-validation');
+                  // Faz um loop neles e evita o envio
+                  var validation = Array.prototype.filter.call(forms, function(form) {
+                    form.addEventListener('submit', function(event) {
+                      if (form.checkValidity() === false) {
+                        event.preventDefault();
+                        event.stopPropagation();
+                      }
+                      form.classList.add('was-validated');
+                    }, false);
+                  });
+                }, false);
+              })();
+            </script>
+      </form>
       </div>
     </div>
   </body>
 </html>
+

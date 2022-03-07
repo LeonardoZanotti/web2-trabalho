@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="pt">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Página de Login</title>
+    <link rel="stylesheet" type="text/css" href="../assets/styles/index.css" />
+  </head>
+  <body>
+    <nav class="top-section navbar">
+      <div class="logo">
+        <img
+          src="../assets/imagens/coroa-logo.png"
+          width="25%"
+          height="25%"
+          background="#777"
+          color="#777"
+          text=" "
+          title=" "
+        />
+      </div>
+    </nav>
+    <div class="container">
+      <div class="row login">
+        <div class="col-md-12">
+          <br />
+          <h1>Novo Atendimento</h1>
+          <form
+            id="form-register"
+            class="form form-register shadow-lg p-3 mb-5 bg-body rounded"
+            method="post"
+            action="#"
+          >
+            <div class="form-row">
+                <div class="col-md-6 mb-3">
+                   <label for="state">Tipo de Atendimento</label>
+                      <select
+                        class="custom-select custom-select-blur"
+                        id="est"
+                        name="est"
+                        required="required"
+                      >
+                          <option value="" disabled="" selected="">
+                            Selecione...
+                          </option>
+                          <option value="reclamacao">Reclamação</option>
+                          <option value="elogio">Elogio</option>
+                          <option value="sugestao">Sugestão</option>
+                          <option value="outros">Outros</option>
+                      </select>
+                      <div class="invalid-feedback">
+                        Por favor, selecione uma opção válida.
+                      </div>
+                </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
+           
+
+              
