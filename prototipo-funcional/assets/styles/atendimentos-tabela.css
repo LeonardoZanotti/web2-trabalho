@@ -2,11 +2,9 @@
     color: white;
 }
 
-
 .ticket-status.open {
     background-color: #bfa95a;
 }
-
 
 .ticket-status.closed {
     background-color: #5cb85c;
@@ -17,3 +15,4 @@
     height: 1em;
 
 }
+
