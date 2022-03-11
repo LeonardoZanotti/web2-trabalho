@@ -30,7 +30,7 @@ CREATE TABLE Endereco (
     numero INTEGER NOT NULL,
     complemento VARCHAR (50) NOT NULL,
     bairro VARCHAR (20) NOT NULL,
-    CEP BIGINT NOT NULL
+    CEP VARCHAR(9) NOT NULL
 );
 
 CREATE TABLE Pessoa (
@@ -39,7 +39,7 @@ CREATE TABLE Pessoa (
     primeiroNome VARCHAR (50) NOT NULL,
     sobreNome VARCHAR(50) NOT NULL,
     dataNascimento DATE NOT NULL,
-    cpf BIGINT NOT NULL,
+    cpf VARCHAR(14) NOT NULL,
     telefone1 VARCHAR (30) NOT NULL,
     telefone2 VARCHAR (30) 
 );
@@ -47,23 +47,24 @@ CREATE TABLE Pessoa (
 CREATE TABLE Gerente (
     idGerente SERIAL PRIMARY KEY,
     idPessoa INTEGER REFERENCES Pessoa (idPessoa),
-    email VARCHAR (50) NOT NULL,
-    senha VARCHAR (50) NOT NULL
+    email VARCHAR (50) NOT NULL, -- TODO: Separar 
+    senha VARCHAR (50) NOT NULL -- TODO: Separar 
 );
 
 CREATE TABLE Funcionario (
     idFuncionario SERIAL PRIMARY KEY,
     idPessoa INTEGER REFERENCES Pessoa (idPessoa),
-    email VARCHAR (50) NOT NULL,
-    senha VARCHAR (50) NOT NULL
+    email VARCHAR (50) NOT NULL, -- TODO: Separar 
+    senha VARCHAR (50) NOT NULL -- TODO: Separar 
 );
 
 CREATE TABLE Cliente (
     idCliente SERIAL PRIMARY KEY,
     idPessoa INTEGER REFERENCES Pessoa (idPessoa),
-    email VARCHAR (50) NOT NULL,
-    senha VARCHAR (50) NOT NULL
+    email VARCHAR (50) NOT NULL, -- TODO: Separar 
+    senha VARCHAR (50) NOT NULL -- TODO: Separar 
 );
+
 
 CREATE TABLE CategoriaProduto (
     idCategoria SERIAL PRIMARY KEY,
