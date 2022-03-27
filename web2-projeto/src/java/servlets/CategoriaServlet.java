@@ -4,13 +4,19 @@
  */
 package servlets;
 
+import database.DAOException;
+import facade.CategoriaFacade;
+import javax.servlet.RequestDispatcher;
+import jakarta.servlet.http.HttpSession;
 import java.io.IOException;
-import java.io.PrintWriter;
+import java.sql.SQLException;
+import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import models.Categoria;
 
 /**
  *
@@ -31,17 +37,82 @@ public class CategoriaServlet extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        try ( PrintWriter out = response.getWriter()) {
-            /* TODO output your page here. You may use following sample code. */
-            out.println("<!DOCTYPE html>");
-            out.println("<html>");
-            out.println("<head>");
-            out.println("<title>Servlet CategoriaServlet</title>");            
-            out.println("</head>");
-            out.println("<body>");
-            out.println("<h1>Servlet CategoriaServlet at " + request.getContextPath() + "</h1>");
-            out.println("</body>");
-            out.println("</html>");
+        HttpSession session = (HttpSession) request.getSession();
+        
+        String action = (String) request.getParameter("action");
+        RequestDispatcher rd;
+        int id;
+        Categoria category;
+        
+        try {
+            if (action == null) {
+                List<Categoria> categories = CategoriaFacade.buscarTodos();
+                request.setAttribute("categories", categories);
+                rd = getServletContext().getRequestDispatcher("/jsp/CategoriaListar.jsp");
+                rd.forward(request, response);
+                return;
+            }
+            
+            switch (action) {
+                default:
+                case "list":
+                    List<Categoria> categories = CategoriaFacade.buscarTodos();
+                    request.setAttribute("categories", categories);
+                    rd = getServletContext().getRequestDispatcher("/jsp/CategoriaListar.jsp");
+                    rd.forward(request, response);
+                    break;
+                case "show":
+                    id = Integer.parseInt(request.getParameter("id"));
+                    category = CategoriaFacade.buscar(id);
+                    request.setAttribute("category", category);
+                    rd = getServletContext().getRequestDispatcher("/jsp/CategoriaVisualizar.jsp");
+                    rd.forward(request, response);
+                    break;
+                case "formUpdate":
+                    id = Integer.parseInt(request.getParameter("id"));
+                    category = CategoriaFacade.buscar(id);
+                    request.setAttribute("category", category);
+                    rd = getServletContext().getRequestDispatcher("/jsp/CategoriaAlterar.jsp");
+                    rd.forward(request, response);
+                    break;
+                case "remove":
+                    id = Integer.parseInt(request.getParameter("id"));
+                    category = CategoriaFacade.buscar(id);
+                    CategoriaFacade.remover(category);
+                    rd = getServletContext().getRequestDispatcher("/CategoriaServlet?action=list");
+                    rd.forward(request, response);
+                    break;
+                case "update":
+                    id = Integer.parseInt(request.getParameter("id"));
+                    Categoria categoriaBD = CategoriaFacade.buscar(id);
+                    category = new Categoria(
+                        categoriaBD.getId(),
+                        request.getParameter("nome")
+                    );
+                    CategoriaFacade.alterar(category);
+                    rd = getServletContext().getRequestDispatcher("/CategoriaServlet?action=list");
+                    rd.forward(request, response);
+                    break;
+                case "formNew":
+                    rd = getServletContext().getRequestDispatcher("/jsp/CategoriaNovo.jsp");
+                    rd.forward(request, response);
+                    break;
+                case "new":
+                    category = new Categoria(
+                        request.getParameter("nome")
+                    );
+                    CategoriaFacade.inserir(category);
+                    rd = getServletContext().getRequestDispatcher("/CategoriaServlet?action=list");
+                    rd.forward(request, response);
+                    break;
+            }
+        } catch (DAOException | IOException | NumberFormatException | SQLException e) {
+            request.setAttribute("jspException", e);
+            request.setAttribute("status_code", 500);
+            request.setAttribute("pageName", "Categoria");
+            request.setAttribute("redirect", "./CategoriaServlet?action=list");
+            rd = getServletContext().getRequestDispatcher("/jsp/erro.jsp");
+            rd.forward(request, response);
         }
     }
 
