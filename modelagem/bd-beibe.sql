@@ -33,52 +33,23 @@ CREATE TABLE Endereco (
     CEP VARCHAR(9) NOT NULL
 );
 
-CREATE TABLE Pessoa (
-    idPessoa SERIAL PRIMARY KEY,
+CREATE TABLE Usuario (
+    idUsuario SERIAL PRIMARY KEY,
     idEndereco INTEGER REFERENCES Endereco (idEndereco),
     primeiroNome VARCHAR (50) NOT NULL,
     sobreNome VARCHAR(50) NOT NULL,
     dataNascimento DATE NOT NULL,
     cpf VARCHAR(14) NOT NULL,
     telefone1 VARCHAR (30) NOT NULL,
-    telefone2 VARCHAR (30) 
-);
-
-CREATE TABLE Gerente (
-    idGerente SERIAL PRIMARY KEY,
-    idPessoa INTEGER REFERENCES Pessoa (idPessoa),
+    telefone2 VARCHAR (30),
+    cargo INTEGER NOT NULL
     email VARCHAR (50) NOT NULL, -- TODO: Separar 
     senha VARCHAR (50) NOT NULL -- TODO: Separar 
 );
-
-CREATE TABLE Funcionario (
-    idFuncionario SERIAL PRIMARY KEY,
-    idPessoa INTEGER REFERENCES Pessoa (idPessoa),
-    email VARCHAR (50) NOT NULL, -- TODO: Separar 
-    senha VARCHAR (50) NOT NULL -- TODO: Separar 
-);
-
-CREATE TABLE Cliente (
-    idCliente SERIAL PRIMARY KEY,
-    idPessoa INTEGER REFERENCES Pessoa (idPessoa),
-    email VARCHAR (50) NOT NULL, -- TODO: Separar 
-    senha VARCHAR (50) NOT NULL -- TODO: Separar 
-);
-
 
 CREATE TABLE CategoriaProduto (
     idCategoria SERIAL PRIMARY KEY,
     nome VARCHAR NOT NULL
-);
-
-CREATE TABLE TipoAtendimento (
-    idTipo SERIAL PRIMARY KEY,
-    nome VARCHAR (50) NOT NULL
-);
-
-CREATE TABLE Situacao (
-    idSituacao SERIAL PRIMARY KEY,
-    estado VARCHAR (30) NOT NULL
 );
 
 CREATE TABLE Produto (
@@ -93,11 +64,10 @@ CREATE TABLE Atendimento (
     idAtendimento SERIAL PRIMARY KEY,
     dataHoraInicio TIMESTAMP NOT NULL,
     dataHoraFim TIMESTAMP NOT NULL,
+    tipoAtendimento VARCHAR (50) NOT NULL,   
     reclamacao VARCHAR (200) NOT NULL,
     solucao VARCHAR (200),
-    idCliente INTEGER REFERENCES Cliente (idCliente),
-    idFuncionario INTEGER REFERENCES Funcionario (idFuncionario),
-    idProduto INTEGER REFERENCES Produto (idProduto),
-    idTipoAtendimento INTEGER REFERENCES TipoAtendimento (idTipo),
-    idSituacao INTEGER REFERENCES Situacao (idSituacao)
+    situacao VARCHAR (30) NOT NULL,
+    idUsuario INTEGER REFERENCES Usuario (idUsuario),
+    idProduto INTEGER REFERENCES Produto (idProduto)
 );
