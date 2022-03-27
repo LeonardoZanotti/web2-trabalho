@@ -33,7 +33,7 @@ public class CategoriaFacade {
     }
     
     public static Categoria buscar(int id) throws DAOException, SQLException, IOException {
-        Categoria categoria = null;
+        Categoria categoria;
         try (Connection con = new ConnectionFactory().getConnection()) {
             CategoriaDAO dao = new CategoriaDAO(con);
             categoria = dao.buscar(id);
@@ -42,7 +42,7 @@ public class CategoriaFacade {
     }
     
     public static List<Categoria> buscarTodos() throws DAOException, SQLException, IOException {
-        List<Categoria> categorias = null;
+        List<Categoria> categorias;
         try (Connection con = new ConnectionFactory().getConnection()) {
             CategoriaDAO dao = new CategoriaDAO(con);
             categorias = dao.buscarTodos();

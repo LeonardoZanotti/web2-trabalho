@@ -33,7 +33,7 @@ public class ProdutoFacade {
     }
     
     public static Produto buscar(int id) throws DAOException, SQLException, IOException {
-        Produto produto = null;
+        Produto produto;
         try (Connection con = new ConnectionFactory().getConnection()) {
             ProdutoDAO dao = new ProdutoDAO(con);
             produto = dao.buscar(id);
@@ -42,7 +42,7 @@ public class ProdutoFacade {
     }
     
     public static List<Produto> buscarTodos() throws DAOException, SQLException, IOException {
-        List<Produto> produtos = null;
+        List<Produto> produtos;
         try (Connection con = new ConnectionFactory().getConnection()) {
             ProdutoDAO dao = new ProdutoDAO(con);
             produtos = dao.buscarTodos();

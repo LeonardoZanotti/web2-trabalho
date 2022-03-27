@@ -33,7 +33,7 @@ public class AtendimentoFacade {
     }
     
     public static Atendimento buscar(int id) throws DAOException, SQLException, IOException {
-        Atendimento atendimento = null;
+        Atendimento atendimento;
         try (Connection con = new ConnectionFactory().getConnection()) {
             AtendimentoDAO dao = new AtendimentoDAO(con);
             atendimento = dao.buscar(id);
@@ -42,7 +42,7 @@ public class AtendimentoFacade {
     }
     
     public static List<Atendimento> buscarPorCliente(int id) throws DAOException, SQLException, IOException {
-        List<Atendimento> atendimentos = null;
+        List<Atendimento> atendimentos;
         try (Connection con = new ConnectionFactory().getConnection()) {
             AtendimentoDAO dao = new AtendimentoDAO(con);
             atendimentos = dao.buscarPorCliente(id);
@@ -51,7 +51,7 @@ public class AtendimentoFacade {
     }
     
     public static List<Atendimento> buscarTodos() throws DAOException, SQLException, IOException {
-        List<Atendimento> atendimentos = null;
+        List<Atendimento> atendimentos;
         try (Connection con = new ConnectionFactory().getConnection()) {
             AtendimentoDAO dao = new AtendimentoDAO(con);
             atendimentos = dao.buscarTodos();
@@ -60,7 +60,7 @@ public class AtendimentoFacade {
     }
     
     public static List<Atendimento> buscarAbertos() throws DAOException, SQLException, IOException {
-        List<Atendimento> atendimentos = null;
+        List<Atendimento> atendimentos;
         try (Connection con = new ConnectionFactory().getConnection()) {
             AtendimentoDAO dao = new AtendimentoDAO(con);
             atendimentos = dao.buscarAbertos();
