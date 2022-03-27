@@ -12,8 +12,6 @@ import java.sql.SQLException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -47,10 +45,11 @@ public class AtendimentoServlet extends HttpServlet {
         RequestDispatcher rd;
         int id;
         Atendimento atendimento;
+        List<Atendimento> atendimentos;
         
         try {
             if (action == null) {
-                List<Atendimento> atendimentos = AtendimentoFacade.buscarTodos();
+                atendimentos = AtendimentoFacade.buscarTodos();
                 request.setAttribute("atendimentos", atendimentos);
                 rd = getServletContext().getRequestDispatcher("/jsp/AtendimentoListar.jsp");
                 rd.forward(request, response);
@@ -60,7 +59,20 @@ public class AtendimentoServlet extends HttpServlet {
             switch (action) {
                 default:
                 case "list":
-                    List<Atendimento> atendimentos = AtendimentoFacade.buscarTodos();
+                    atendimentos = AtendimentoFacade.buscarTodos();
+                    request.setAttribute("atendimentos", atendimentos);
+                    rd = getServletContext().getRequestDispatcher("/jsp/AtendimentoListar.jsp");
+                    rd.forward(request, response);
+                    break;
+                case "list-cliente":
+                    id = Integer.parseInt(request.getParameter("id"));
+                    atendimentos = AtendimentoFacade.buscarPorCliente(id);
+                    request.setAttribute("atendimentos", atendimentos);
+                    rd = getServletContext().getRequestDispatcher("/jsp/AtendimentoListar.jsp");
+                    rd.forward(request, response);
+                    break;
+                case "list-open":
+                    atendimentos = AtendimentoFacade.buscarAbertos();
                     request.setAttribute("atendimentos", atendimentos);
                     rd = getServletContext().getRequestDispatcher("/jsp/AtendimentoListar.jsp");
                     rd.forward(request, response);
@@ -91,6 +103,8 @@ public class AtendimentoServlet extends HttpServlet {
                     Atendimento AtendimentoBD = AtendimentoFacade.buscar(id);
                     atendimento = new Atendimento(
                         AtendimentoBD.getId(),
+                        Integer.parseInt(request.getParameter("idProduto")),
+                        Integer.parseInt(request.getParameter("idCliente")),
                         new SimpleDateFormat("yyyy-MM-dd").parse(request.getParameter("dataInicio")),
                         new SimpleDateFormat("yyyy-MM-dd").parse(request.getParameter("dataFim")),
                         request.getParameter("reclamacao"),
@@ -108,6 +122,8 @@ public class AtendimentoServlet extends HttpServlet {
                     break;
                 case "new":
                     atendimento = new Atendimento(
+                        Integer.parseInt(request.getParameter("idProduto")),
+                        Integer.parseInt(request.getParameter("idCliente")),
                         new SimpleDateFormat("yyyy-MM-dd").parse(request.getParameter("dataInicio")),
                         new SimpleDateFormat("yyyy-MM-dd").parse(request.getParameter("dataFim")),
                         request.getParameter("reclamacao"),

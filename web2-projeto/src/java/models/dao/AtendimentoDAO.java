@@ -11,7 +11,6 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 import models.Atendimento;
 
@@ -20,10 +19,12 @@ import models.Atendimento;
  * @author leonardozanotti
  */
 public class AtendimentoDAO implements DAO<Atendimento> {
-    private static final String QUERY_INSERIR = "INSERT INTO Atendimento (dataHoraInicio, dataHoraFim, reclamacao, solucao, tipoAtendimento, situacao) VALUES (?, ?, ?, ?, ?, ?)";
+    private static final String QUERY_INSERIR = "INSERT INTO Atendimento (idProduto, idUsuario, dataHoraInicio, dataHoraFim, reclamacao, solucao, tipoAtendimento, situacao) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
     private static final String QUERY_BUSCAR = "SELECT * FROM Atendimento WHERE idAtendimento = (?)";
-    private static final String QUERY_BUSCAR_TODOS = "SELECT * FROM Atendimento";
-    private static final String QUERY_ALTERAR = "UPDATE Atendimento SET dataHoraInicio = (?), dataHoraFim = (?), reclamacao = (?), solucao = (?), tipoAtendimento = (?), situacao = (?) WHERE idAtendimento = (?)";
+    private static final String QUERY_BUSCAR_TODOS = "SELECT * FROM Atendimento ORDER BY dataHoraInicio ASC";
+    private static final String QUERY_BUSCAR_ABERTOS = "SELECT * FROM Atendimento WHERE situacao = 'aberto' ORDER BY dataHoraInicio ASC";
+    private static final String QUERY_BUSCAR_CLIENTE = "SELECT * FROM Atendimento WHERE idUsuario = (?) ORDER BY dataHoraInicio DESC";
+    private static final String QUERY_ALTERAR = "UPDATE Atendimento SET idProduto = (?), idUsuario = (?), dataHoraInicio = (?), dataHoraFim = (?), reclamacao = (?), solucao = (?), tipoAtendimento = (?), situacao = (?) WHERE idAtendimento = (?)";
     private static final String QUERY_REMOVER = "DELETE FROM Atendimento WHERE idAtendimento = (?)";
 
     private Connection con = null;
@@ -43,6 +44,8 @@ public class AtendimentoDAO implements DAO<Atendimento> {
                 if (rs.next())
                     return new Atendimento(
                         rs.getInt("idAtendimento"),
+                        rs.getInt("idProduto"),
+                        rs.getInt("idUsuario"),
                         rs.getDate("dataHoraInicio"),
                         rs.getDate("dataHoraFim"),
                         rs.getString("reclamacao"),
@@ -64,6 +67,8 @@ public class AtendimentoDAO implements DAO<Atendimento> {
             while (rs.next()) {
                 Atendimento atendimento = new Atendimento(
                     rs.getInt("idAtendimento"),
+                    rs.getInt("idProduto"),
+                    rs.getInt("idUsuario"),
                     rs.getDate("dataHoraInicio"),
                     rs.getDate("dataHoraFim"),
                     rs.getString("reclamacao"),
@@ -78,16 +83,67 @@ public class AtendimentoDAO implements DAO<Atendimento> {
             throw new DAOException("Erro buscando todos os atendimentos: " + AtendimentoDAO.QUERY_BUSCAR_TODOS, e);
         }
     }
-
+    
+    public List<Atendimento> buscarAbertos() throws DAOException {
+        List<Atendimento> Atendimentos = new ArrayList<>();
+        try (PreparedStatement st = this.con.prepareStatement(AtendimentoDAO.QUERY_BUSCAR_ABERTOS); ResultSet rs = st.executeQuery()) {
+            while (rs.next()) {
+                Atendimento atendimento = new Atendimento(
+                    rs.getInt("idAtendimento"),
+                    rs.getInt("idProduto"),
+                    rs.getInt("idUsuario"),
+                    rs.getDate("dataHoraInicio"),
+                    rs.getDate("dataHoraFim"),
+                    rs.getString("reclamacao"),
+                    rs.getString("solucao"),
+                    rs.getString("tipoAtendimento"),
+                    rs.getString("situacao")
+                );
+                Atendimentos.add(atendimento);
+            }
+            return Atendimentos;
+        } catch (SQLException e) {
+            throw new DAOException("Erro buscando todos os atendimentos abertos: " + AtendimentoDAO.QUERY_BUSCAR_ABERTOS, e);
+        }
+    }
+    
+    public List<Atendimento> buscarPorCliente(long id) throws DAOException {
+        List<Atendimento> Atendimentos = new ArrayList<>();
+        try (PreparedStatement st = this.con.prepareStatement(AtendimentoDAO.QUERY_BUSCAR_CLIENTE)) {
+            st.setLong(1, id);
+            try (ResultSet rs = st.executeQuery()) {
+                while (rs.next()) {
+                    Atendimento atendimento = new Atendimento(
+                        rs.getInt("idAtendimento"),
+                        rs.getInt("idProduto"),
+                        rs.getInt("idUsuario"),
+                        rs.getDate("dataHoraInicio"),
+                        rs.getDate("dataHoraFim"),
+                        rs.getString("reclamacao"),
+                        rs.getString("solucao"),
+                        rs.getString("tipoAtendimento"),
+                        rs.getString("situacao")
+                    );
+                    Atendimentos.add(atendimento);
+                }
+            }
+            return Atendimentos;
+        } catch (SQLException e) {
+            throw new DAOException("Erro buscando todos os atendimentos do cliente: " + AtendimentoDAO.QUERY_BUSCAR_CLIENTE, e);
+        }
+    }
+    
     @Override
     public void inserir(Atendimento a) throws DAOException {
         try (PreparedStatement st = con.prepareStatement(AtendimentoDAO.QUERY_INSERIR)) {
-            st.setDate(1, (java.sql.Date) a.getDataInicio());
-            st.setDate(2, (java.sql.Date) a.getDataFim());
-            st.setString(3, a.getReclamacao());
-            st.setString(4, a.getSolucao());
-            st.setString(5, a.getTipoAtendimento());
-            st.setString(6, a.getSituacao());
+            st.setInt(1, a.getIdProduto());
+            st.setInt(2, a.getIdUsuario());
+            st.setDate(3, (java.sql.Date) a.getDataInicio());
+            st.setDate(4, (java.sql.Date) a.getDataFim());
+            st.setString(5, a.getReclamacao());
+            st.setString(6, a.getSolucao());
+            st.setString(7, a.getTipoAtendimento());
+            st.setString(8, a.getSituacao());
             st.executeUpdate();
         } catch (SQLException e) {
             throw new DAOException("Erro inserindo atendimento: " + AtendimentoDAO.QUERY_INSERIR + "/ " + a.toString(), e);
@@ -97,13 +153,15 @@ public class AtendimentoDAO implements DAO<Atendimento> {
     @Override
     public void atualizar(Atendimento a) throws DAOException {
         try (PreparedStatement st = con.prepareStatement(AtendimentoDAO.QUERY_ALTERAR)) {
-            st.setDate(1, (java.sql.Date) a.getDataInicio());
-            st.setDate(2, (java.sql.Date) a.getDataFim());
-            st.setString(3, a.getReclamacao());
-            st.setString(4, a.getSolucao());
-            st.setString(5, a.getTipoAtendimento());
-            st.setString(6, a.getSituacao());
-            st.setInt(7, a.getId());
+            st.setInt(1, a.getIdProduto());
+            st.setInt(2, a.getIdUsuario());
+            st.setDate(3, (java.sql.Date) a.getDataInicio());
+            st.setDate(4, (java.sql.Date) a.getDataFim());
+            st.setString(5, a.getReclamacao());
+            st.setString(6, a.getSolucao());
+            st.setString(7, a.getTipoAtendimento());
+            st.setString(8, a.getSituacao());
+            st.setInt(9, a.getId());
             st.executeUpdate();
         } catch (SQLException e) {
             throw new DAOException("Erro atualizando atendimento: " + AtendimentoDAO.QUERY_ALTERAR + "/ " + a.toString(), e);

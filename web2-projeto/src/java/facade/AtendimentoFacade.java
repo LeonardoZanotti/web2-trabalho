@@ -33,21 +33,39 @@ public class AtendimentoFacade {
     }
     
     public static Atendimento buscar(int id) throws DAOException, SQLException, IOException {
-        Atendimento Atendimento = null;
+        Atendimento atendimento = null;
         try (Connection con = new ConnectionFactory().getConnection()) {
             AtendimentoDAO dao = new AtendimentoDAO(con);
-            Atendimento = dao.buscar(id);
+            atendimento = dao.buscar(id);
         }
-        return Atendimento;
+        return atendimento;
+    }
+    
+    public static List<Atendimento> buscarPorCliente(int id) throws DAOException, SQLException, IOException {
+        List<Atendimento> atendimentos = null;
+        try (Connection con = new ConnectionFactory().getConnection()) {
+            AtendimentoDAO dao = new AtendimentoDAO(con);
+            atendimentos = dao.buscarPorCliente(id);
+        }
+        return atendimentos;
     }
     
     public static List<Atendimento> buscarTodos() throws DAOException, SQLException, IOException {
-        List<Atendimento> Atendimentos = null;
+        List<Atendimento> atendimentos = null;
         try (Connection con = new ConnectionFactory().getConnection()) {
             AtendimentoDAO dao = new AtendimentoDAO(con);
-            Atendimentos = dao.buscarTodos();
+            atendimentos = dao.buscarTodos();
         }
-        return Atendimentos;
+        return atendimentos;
+    }
+    
+    public static List<Atendimento> buscarAbertos() throws DAOException, SQLException, IOException {
+        List<Atendimento> atendimentos = null;
+        try (Connection con = new ConnectionFactory().getConnection()) {
+            AtendimentoDAO dao = new AtendimentoDAO(con);
+            atendimentos = dao.buscarAbertos();
+        }
+        return atendimentos;
     }
     
     public static void remover(Atendimento a) throws DAOException, SQLException, IOException {

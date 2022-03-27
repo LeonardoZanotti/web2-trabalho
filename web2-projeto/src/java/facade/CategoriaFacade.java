@@ -33,21 +33,21 @@ public class CategoriaFacade {
     }
     
     public static Categoria buscar(int id) throws DAOException, SQLException, IOException {
-        Categoria Categoria = null;
+        Categoria categoria = null;
         try (Connection con = new ConnectionFactory().getConnection()) {
             CategoriaDAO dao = new CategoriaDAO(con);
-            Categoria = dao.buscar(id);
+            categoria = dao.buscar(id);
         }
-        return Categoria;
+        return categoria;
     }
     
     public static List<Categoria> buscarTodos() throws DAOException, SQLException, IOException {
-        List<Categoria> Categorias = null;
+        List<Categoria> categorias = null;
         try (Connection con = new ConnectionFactory().getConnection()) {
             CategoriaDAO dao = new CategoriaDAO(con);
-            Categorias = dao.buscarTodos();
+            categorias = dao.buscarTodos();
         }
-        return Categorias;
+        return categorias;
     }
     
     public static void remover(Categoria c) throws DAOException, SQLException, IOException {

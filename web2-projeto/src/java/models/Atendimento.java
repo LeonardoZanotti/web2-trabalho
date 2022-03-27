@@ -11,11 +11,13 @@ import java.util.Date;
  * @author leonardozanotti
  */
 public class Atendimento {
-    private int id;
+    private int id, idProduto, idUsuario;
     private Date dataInicio, dataFim;
     private String reclamacao, solucao, tipoAtendimento, situacao;
 
-    public Atendimento(Date dataInicio, Date dataFim, String reclamacao, String solucao, String tipoAtendimento, String situacao) {
+    public Atendimento(int idProduto, int idUsuario, Date dataInicio, Date dataFim, String reclamacao, String solucao, String tipoAtendimento, String situacao) {
+        this.idProduto = idProduto;
+        this.idUsuario = idUsuario;
         this.dataInicio = dataInicio;
         this.dataFim = dataFim;
         this.reclamacao = reclamacao;
@@ -24,8 +26,10 @@ public class Atendimento {
         this.situacao = situacao;
     }
     
-    public Atendimento( int id, Date dataInicio, Date dataFim, String reclamacao, String solucao, String tipoAtendimento, String situacao) {
+    public Atendimento(int id, int idProduto, int idUsuario, Date dataInicio, Date dataFim, String reclamacao, String solucao, String tipoAtendimento, String situacao) {
         this.id = id;
+        this.idProduto = idProduto;
+        this.idUsuario = idUsuario;
         this.dataInicio = dataInicio;
         this.dataFim = dataFim;
         this.reclamacao = reclamacao;
@@ -33,7 +37,31 @@ public class Atendimento {
         this.tipoAtendimento = tipoAtendimento;
         this.situacao = situacao;
     }
-    
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public int getIdProduto() {
+        return idProduto;
+    }
+
+    public void setIdProduto(int idProduto) {
+        this.idProduto = idProduto;
+    }
+
+    public int getIdUsuario() {
+        return idUsuario;
+    }
+
+    public void setIdUsuario(int idUsuario) {
+        this.idUsuario = idUsuario;
+    }
+
     public Date getDataInicio() {
         return dataInicio;
     }
@@ -81,14 +109,7 @@ public class Atendimento {
     public void setSituacao(String situacao) {
         this.situacao = situacao;
     }
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
+    
     
     
 }
