@@ -56,11 +56,11 @@ public class CategoriaDAO implements DAO<Categoria> {
         List<Categoria> Categorias = new ArrayList<>();
         try (PreparedStatement st = this.con.prepareStatement(CategoriaDAO.QUERY_BUSCAR_TODOS); ResultSet rs = st.executeQuery()) {
             while (rs.next()) {
-                Categoria client = new Categoria(
+                Categoria category = new Categoria(
                     rs.getInt("idCategoria"),
                     rs.getString("nome")
                 );
-                Categorias.add(client);
+                Categorias.add(category);
             }
             return Categorias;
         } catch (SQLException e) {

@@ -4,13 +4,19 @@
  */
 package servlets;
 
+import database.DAOException;
+import facade.ProdutoFacade;
+import jakarta.servlet.http.HttpSession;
 import java.io.IOException;
-import java.io.PrintWriter;
+import java.sql.SQLException;
+import java.util.List;
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import models.Produto;
 
 /**
  *
@@ -31,17 +37,88 @@ public class ProdutoServlet extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        try ( PrintWriter out = response.getWriter()) {
-            /* TODO output your page here. You may use following sample code. */
-            out.println("<!DOCTYPE html>");
-            out.println("<html>");
-            out.println("<head>");
-            out.println("<title>Servlet ProdutoServlet</title>");            
-            out.println("</head>");
-            out.println("<body>");
-            out.println("<h1>Servlet ProdutoServlet at " + request.getContextPath() + "</h1>");
-            out.println("</body>");
-            out.println("</html>");
+        HttpSession session = (HttpSession) request.getSession();
+        
+        String action = (String) request.getParameter("action");
+        RequestDispatcher rd;
+        int id;
+        Produto product;
+        
+        try {
+            if (action == null) {
+                List<Produto> products = ProdutoFacade.buscarTodos();
+                request.setAttribute("products", products);
+                rd = getServletContext().getRequestDispatcher("/jsp/ProdutoListar.jsp");
+                rd.forward(request, response);
+                return;
+            }
+            
+            switch (action) {
+                default:
+                case "list":
+                    List<Produto> products = ProdutoFacade.buscarTodos();
+                    request.setAttribute("products", products);
+                    rd = getServletContext().getRequestDispatcher("/jsp/ProdutoListar.jsp");
+                    rd.forward(request, response);
+                    break;
+                case "show":
+                    id = Integer.parseInt(request.getParameter("id"));
+                    product = ProdutoFacade.buscar(id);
+                    request.setAttribute("product", product);
+                    rd = getServletContext().getRequestDispatcher("/jsp/ProdutoVisualizar.jsp");
+                    rd.forward(request, response);
+                    break;
+                case "formUpdate":
+                    id = Integer.parseInt(request.getParameter("id"));
+                    product = ProdutoFacade.buscar(id);
+                    request.setAttribute("product", product);
+                    rd = getServletContext().getRequestDispatcher("/jsp/ProdutoAlterar.jsp");
+                    rd.forward(request, response);
+                    break;
+                case "remove":
+                    id = Integer.parseInt(request.getParameter("id"));
+                    product = ProdutoFacade.buscar(id);
+                    ProdutoFacade.remover(product);
+                    rd = getServletContext().getRequestDispatcher("/ProdutoServlet?action=list");
+                    rd.forward(request, response);
+                    break;
+                case "update":
+                    id = Integer.parseInt(request.getParameter("id"));
+                    Produto ProdutoBD = ProdutoFacade.buscar(id);
+                    product = new Produto(
+                        ProdutoBD.getId(),
+                        Integer.parseInt(request.getParameter("peso")),
+                        request.getParameter("nome"),
+                        Integer.parseInt(request.getParameter("idCategoria")),
+                        request.getParameter("descricao")
+                    );
+                    ProdutoFacade.alterar(product);
+                    rd = getServletContext().getRequestDispatcher("/ProdutoServlet?action=list");
+                    rd.forward(request, response);
+                    break;
+                case "formNew":
+                    rd = getServletContext().getRequestDispatcher("/jsp/ProdutoNovo.jsp");
+                    rd.forward(request, response);
+                    break;
+                case "new":
+                    product = new Produto(
+                        Integer.parseInt(request.getParameter("peso")),
+                        request.getParameter("nome"),
+                        Integer.parseInt(request.getParameter("idCategoria")),
+                        request.getParameter("descricao")
+                    );
+                    ProdutoFacade.inserir(product);
+                    rd = getServletContext().getRequestDispatcher("/ProdutoServlet?action=list");
+                    rd.forward(request, response);
+                    break;
+            }
+        } catch (DAOException | IOException | NumberFormatException | SQLException e) {
+            request.setAttribute("jspException", e);
+            request.setAttribute("status_code", 500);
+            request.setAttribute("pageName", "Produto");
+            request.setAttribute("redirect", "./ProdutoServlet?action=list");
+            rd = getServletContext().getRequestDispatcher("/jsp/erro.jsp");
+            rd.forward(request, response);
         }
     }
 

@@ -9,21 +9,21 @@ package models;
  * @author leonardozanotti
  */
 public class Produto {
-    private int id, peso;
-    private String nome, categoria, descricao;
+    private int id, idCategoria, peso;
+    private String nome, descricao;
 
-    public Produto(int peso, String nome, String categoria, String descricao) {
+    public Produto(int peso, String nome, int idCategoria, String descricao) {
         this.peso = peso;
         this.nome = nome;
-        this.categoria = categoria;
+        this.idCategoria = idCategoria;
         this.descricao = descricao;
     }
 
-    public Produto(int id, int peso, String nome, String categoria, String descricao) {
+    public Produto(int id, int peso, String nome, int idCategoria, String descricao) {
         this.id = id;
         this.peso = peso;
         this.nome = nome;
-        this.categoria = categoria;
+        this.idCategoria = idCategoria;
         this.descricao = descricao;
     }
 
@@ -51,12 +51,12 @@ public class Produto {
         this.nome = nome;
     }
 
-    public String getCategoria() {
-        return categoria;
+    public int getIdCategoria() {
+        return idCategoria;
     }
 
-    public void setCategoria(String categoria) {
-        this.categoria = categoria;
+    public void setIdCategoria(int idCategoria) {
+        this.idCategoria = idCategoria;
     }
 
     public String getDescricao() {
