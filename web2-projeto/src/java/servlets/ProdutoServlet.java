@@ -87,7 +87,7 @@ public class ProdutoServlet extends HttpServlet {
                     Produto ProdutoBD = ProdutoFacade.buscar(id);
                     product = new Produto(
                         ProdutoBD.getId(),
-                        Integer.parseInt(request.getParameter("peso")),
+                        Float.parseFloat(request.getParameter("peso")),
                         request.getParameter("nome"),
                         Integer.parseInt(request.getParameter("idCategoria")),
                         request.getParameter("descricao")
@@ -102,7 +102,7 @@ public class ProdutoServlet extends HttpServlet {
                     break;
                 case "new":
                     product = new Produto(
-                        Integer.parseInt(request.getParameter("peso")),
+                        Float.parseFloat(request.getParameter("peso")),
                         request.getParameter("nome"),
                         Integer.parseInt(request.getParameter("idCategoria")),
                         request.getParameter("descricao")

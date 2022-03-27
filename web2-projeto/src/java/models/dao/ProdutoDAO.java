@@ -43,7 +43,7 @@ private static final String QUERY_INSERIR = "INSERT INTO Produto (idCategoria, n
                 if (rs.next())
                     return new Produto(
                         rs.getInt("idProduto"),
-                        rs.getInt("peso"),
+                        rs.getFloat("peso"),
                         rs.getString("nome"),
                         rs.getInt("idCategoria"),
                         rs.getString("descricao")
@@ -62,7 +62,7 @@ private static final String QUERY_INSERIR = "INSERT INTO Produto (idCategoria, n
             while (rs.next()) {
                 Produto product = new Produto(
                     rs.getInt("idProduto"),
-                    rs.getInt("peso"),
+                    rs.getFloat("peso"),
                     rs.getString("nome"),
                     rs.getInt("idCategoria"),
                     rs.getString("descricao")
@@ -81,7 +81,7 @@ private static final String QUERY_INSERIR = "INSERT INTO Produto (idCategoria, n
             st.setInt(1, p.getIdCategoria());
             st.setString(2, p.getNome());
             st.setString(3, p.getDescricao());
-            st.setInt(4, p.getPeso());
+            st.setFloat(4, p.getPeso());
             st.executeUpdate();
         } catch (SQLException e) {
             throw new DAOException("Erro inserindo produto: " + ProdutoDAO.QUERY_INSERIR + "/ " + p.toString(), e);
@@ -94,7 +94,7 @@ private static final String QUERY_INSERIR = "INSERT INTO Produto (idCategoria, n
             st.setInt(1, p.getIdCategoria());
             st.setString(2, p.getNome());
             st.setString(3, p.getDescricao());
-            st.setInt(4, p.getPeso());
+            st.setFloat(4, p.getPeso());
             st.setInt(5, p.getId());
             st.executeUpdate();
         } catch (SQLException e) {

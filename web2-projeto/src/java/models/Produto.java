@@ -9,17 +9,18 @@ package models;
  * @author leonardozanotti
  */
 public class Produto {
-    private int id, idCategoria, peso;
+    private int id, idCategoria;
+    private float peso;
     private String nome, descricao;
 
-    public Produto(int peso, String nome, int idCategoria, String descricao) {
+    public Produto(float peso, String nome, int idCategoria, String descricao) {
         this.peso = peso;
         this.nome = nome;
         this.idCategoria = idCategoria;
         this.descricao = descricao;
     }
 
-    public Produto(int id, int peso, String nome, int idCategoria, String descricao) {
+    public Produto(int id, float peso, String nome, int idCategoria, String descricao) {
         this.id = id;
         this.peso = peso;
         this.nome = nome;
@@ -35,11 +36,11 @@ public class Produto {
         this.id = id;
     }
 
-    public int getPeso() {
+    public float getPeso() {
         return peso;
     }
 
-    public void setPeso(int peso) {
+    public void setPeso(float peso) {
         this.peso = peso;
     }
 
