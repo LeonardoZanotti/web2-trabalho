@@ -4,9 +4,12 @@
  */
 package database;
 
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
+import java.util.Properties;
 
 /**
  *
@@ -48,7 +51,7 @@ public class ConnectionFactory implements AutoCloseable {
                 this.con = null;
                 System.out.println("Connection closed!");
             }
-            catch (Exception e) {
+            catch (SQLException e) {
                 System.out.println("Erro fechando a conexão.");
                 e.printStackTrace();
             }
