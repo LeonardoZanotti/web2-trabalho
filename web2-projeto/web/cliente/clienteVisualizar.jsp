@@ -36,7 +36,7 @@
                <br><h2> Bem-vinda(o)!</h2>
                <h1 class="title h1 m-0 mt-4 text-center">Meus dados</h1><br>
                 <form class="form shadow " action="${pageContext.request.contextPath}/ClienteServlet?action=formModificaCliente" method="post">     
-                  <input type="hidden" name="entity" value="${cliente.IdCliente}">
+                  <input type="hidden" name="entity" value="${cliente.getIdCliente()}">
                     <div class="form-group">
                      <div class="row">
 
