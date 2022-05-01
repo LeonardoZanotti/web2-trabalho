@@ -5,6 +5,21 @@
  */
 package com.ufpr.tads.web2.servlets;
 
+import java.io.IOException;
+import java.io.PrintWriter;
+import java.util.Calendar;
+import java.util.Collections;
+import java.util.List;
+
+import javax.servlet.RequestDispatcher;
+import javax.servlet.ServletContext;
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+
 import com.ufpr.tads.web2.beans.Atendimento;
 import com.ufpr.tads.web2.beans.Funcionario;
 import com.ufpr.tads.web2.beans.LoginBean;
@@ -15,31 +30,18 @@ import com.ufpr.tads.web2.facade.FuncionarioException;
 import com.ufpr.tads.web2.facade.FuncionarioFacade;
 import com.ufpr.tads.web2.facade.SituacaoException;
 import com.ufpr.tads.web2.facade.SituacaoFacade;
-import java.io.IOException;
-import java.io.PrintWriter;
-import java.util.Calendar;
-import java.util.Collections;
-import java.util.List;
-import javax.servlet.RequestDispatcher;
-import javax.servlet.ServletContext;
-import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.HttpServlet;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
-@WebServlet(name = "FuncionarioServlet", urlPatterns = {"/FuncionarioServlet"})
+@WebServlet(name = "FuncionarioServlet", urlPatterns = { "/FuncionarioServlet" })
 public class FuncionarioServlet extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
      *
-     * @param request servlet request
+     * @param request  servlet request
      * @param response servlet response
      * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
+     * @throws IOException      if an I/O error occurs
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -52,59 +54,46 @@ public class FuncionarioServlet extends HttpServlet {
             String action = request.getParameter("action");
             ServletContext sc = request.getServletContext();
 
-            if (logado.getNome() != null)
-            {
-                if (action == null || action.equals("portal"))
-                {
-                    try
-                    {
+            if (logado.getNome() != null) {
+                if (action == null || action.equals("portal")) {
+                    try {
                         Funcionario funcionario = FuncionarioFacade.retornaFuncionario(logado.getId());
                         Situacao emAberto = SituacaoFacade.retornaSituacao(1);
                         List<Atendimento> listaAtendimentosAbertos = AtendimentoFacade.getListaPorSituacao(emAberto);
-                        if (listaAtendimentosAbertos.size() > 0)
-                        {
-                            Collections.sort(listaAtendimentosAbertos, (Atendimento a1, Atendimento a2) -> a1.getDataHoraInicio().compareTo(a2.getDataHoraInicio()));
+                        if (listaAtendimentosAbertos.size() > 0) {
+                            Collections.sort(listaAtendimentosAbertos, (Atendimento a1, Atendimento a2) -> a1
+                                    .getDataHoraInicio().compareTo(a2.getDataHoraInicio()));
                             request.setAttribute("listaAtendimentosAbertos", listaAtendimentosAbertos);
                         }
                         request.setAttribute("funcionario", funcionario);
 
                         RequestDispatcher rd = sc.getRequestDispatcher("/funcionario/portalFuncionario.jsp");
                         rd.forward(request, response);
-                    }
-                    catch(FuncionarioException | SituacaoException | AtendimentoException e)
-                    {
+                    } catch (FuncionarioException | SituacaoException | AtendimentoException e) {
                         request.setAttribute("msg", "ERRO: " + e.getMessage());
                         RequestDispatcher rd = sc.getRequestDispatcher("/erro.jsp");
                         rd.forward(request, response);
                     }
-                }
-                else if (action.equals("todosAtendimentos"))
-                {
-                    try
-                    {
+                } else if (action.equals("todosAtendimentos")) {
+                    try {
                         Funcionario funcionario = FuncionarioFacade.retornaFuncionario(logado.getId());
                         List<Atendimento> listaAtendimentos = AtendimentoFacade.getLista();
-                        if (listaAtendimentos.size() > 0)
-                        {
-                            Collections.sort(listaAtendimentos, (Atendimento a1, Atendimento a2) -> a1.getDataHoraInicio().compareTo(a2.getDataHoraInicio()));
+                        if (listaAtendimentos.size() > 0) {
+                            Collections.sort(listaAtendimentos, (Atendimento a1, Atendimento a2) -> a1
+                                    .getDataHoraInicio().compareTo(a2.getDataHoraInicio()));
                             request.setAttribute("listaAtendimentos", listaAtendimentos);
                         }
                         request.setAttribute("funcionario", funcionario);
 
                         RequestDispatcher rd = sc.getRequestDispatcher("/funcionario/todosAtendimentos.jsp");
                         rd.forward(request, response);
-                    }
-                    catch(FuncionarioException | AtendimentoException e)
-                    {
+                    } catch (FuncionarioException | AtendimentoException e) {
                         request.setAttribute("msg", "ERRO: " + e.getMessage());
                         RequestDispatcher rd = sc.getRequestDispatcher("/erro.jsp");
                         rd.forward(request, response);
                     }
-                }
-                else if (action.equals("formResolverAtendimento"))
-                {
-                    try
-                    {
+                } else if (action.equals("formResolverAtendimento")) {
+                    try {
                         String sId = request.getParameter("idAtendimento");
                         int idAtendimento = Integer.parseInt(sId);
                         Atendimento atendimento = AtendimentoFacade.retornaAtendimento(idAtendimento);
@@ -112,19 +101,15 @@ public class FuncionarioServlet extends HttpServlet {
                         RequestDispatcher rd = sc.getRequestDispatcher("/funcionario/resolucaoAtendimento.jsp");
                         request.setAttribute("atendimento", atendimento);
                         rd.forward(request, response);
-                    }
-                    catch(AtendimentoException | NumberFormatException e)
-                    {
+                    } catch (AtendimentoException | NumberFormatException e) {
                         request.setAttribute("msg", "ERRO: " + e.getMessage());
                         RequestDispatcher rd = sc.getRequestDispatcher("/erro.jsp");
                         rd.forward(request, response);
                     }
-                }
-                else if (action.equals("resolverAtendimento"))
-                {
-                    try
-                    {
-                        Atendimento atendimento = AtendimentoFacade.retornaAtendimento(Integer.parseInt(request.getParameter("idAtendimento")));
+                } else if (action.equals("resolverAtendimento")) {
+                    try {
+                        Atendimento atendimento = AtendimentoFacade
+                                .retornaAtendimento(Integer.parseInt(request.getParameter("idAtendimento")));
                         Funcionario funcionario = FuncionarioFacade.retornaFuncionario(logado.getId());
 
                         atendimento.setFuncionario(funcionario);
@@ -132,27 +117,21 @@ public class FuncionarioServlet extends HttpServlet {
                         atendimento.setDataHoraFim(Calendar.getInstance());
 
                         boolean modificou = AtendimentoFacade.modificaAtendimento(atendimento);
-                        if(modificou)
-                        {
+                        if (modificou) {
                             response.sendRedirect(request.getContextPath() + "/FuncionarioServlet?action=portal");
-                        }
-                        else
-                        {
-                            request.setAttribute("msg", "Erro ao modificar atendimento de id: " + atendimento.getIdAtendimento());
+                        } else {
+                            request.setAttribute("msg",
+                                    "Erro ao modificar atendimento de id: " + atendimento.getIdAtendimento());
                             RequestDispatcher rd = request.getRequestDispatcher("/erro.jsp");
                             rd.forward(request, response);
                         }
-                    }
-                    catch(AtendimentoException | NumberFormatException | FuncionarioException e)
-                    {
+                    } catch (AtendimentoException | NumberFormatException | FuncionarioException e) {
                         request.setAttribute("msg", "ERRO: " + e.getMessage());
                         RequestDispatcher rd = request.getRequestDispatcher("/erro.jsp");
                         rd.forward(request, response);
                     }
                 }
-            }
-            else
-            {
+            } else {
                 RequestDispatcher rd = sc.getRequestDispatcher("/index.jsp");
                 request.setAttribute("msg", "Usuário deve se autentificar para acessar o sistema");
                 rd.forward(request, response);
@@ -160,14 +139,15 @@ public class FuncionarioServlet extends HttpServlet {
         }
     }
 
-    // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
+    // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the
+    // + sign on the left to edit the code.">
     /**
      * Handles the HTTP <code>GET</code> method.
      *
-     * @param request servlet request
+     * @param request  servlet request
      * @param response servlet response
      * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
+     * @throws IOException      if an I/O error occurs
      */
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
@@ -178,10 +158,10 @@ public class FuncionarioServlet extends HttpServlet {
     /**
      * Handles the HTTP <code>POST</code> method.
      *
-     * @param request servlet request
+     * @param request  servlet request
      * @param response servlet response
      * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
+     * @throws IOException      if an I/O error occurs
      */
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)

@@ -5,13 +5,10 @@
  */
 package com.ufpr.tads.web2.servlets;
 
-import com.ufpr.tads.web2.beans.CategoriaProduto;
-import com.ufpr.tads.web2.beans.LoginBean;
-import com.ufpr.tads.web2.facade.CategoriaProdutoException;
-import com.ufpr.tads.web2.facade.CategoriaProdutoFacade;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.List;
+
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
@@ -21,17 +18,22 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-@WebServlet(name = "CategoriaProdutoServlet", urlPatterns = {"/CategoriaProdutoServlet"})
+import com.ufpr.tads.web2.beans.CategoriaProduto;
+import com.ufpr.tads.web2.beans.LoginBean;
+import com.ufpr.tads.web2.facade.CategoriaProdutoException;
+import com.ufpr.tads.web2.facade.CategoriaProdutoFacade;
+
+@WebServlet(name = "CategoriaProdutoServlet", urlPatterns = { "/CategoriaProdutoServlet" })
 public class CategoriaProdutoServlet extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
      *
-     * @param request servlet request
+     * @param request  servlet request
      * @param response servlet response
      * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
+     * @throws IOException      if an I/O error occurs
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -43,116 +45,91 @@ public class CategoriaProdutoServlet extends HttpServlet {
             String action = request.getParameter("action");
             ServletContext sc = request.getServletContext();
 
-            if (logado.getNome() != null)
-            {
-                if (action == null || action.equals("listarCategorias"))
-                {
-                    try
-                    {
+            if (logado.getNome() != null) {
+                if (action == null || action.equals("listarCategorias")) {
+                    try {
                         List<CategoriaProduto> listaCategorias = CategoriaProdutoFacade.getLista();
-                        if (listaCategorias.size() > 0)
-                        {
+                        if (listaCategorias.size() > 0) {
                             request.setAttribute("listaCategorias", listaCategorias);
                         }
                         RequestDispatcher rd = sc.getRequestDispatcher("/funcionario/listarCategoriasProduto.jsp");
                         rd.forward(request, response);
-                    }
-                    catch (CategoriaProdutoException e)
-                    {
+                    } catch (CategoriaProdutoException e) {
                         request.setAttribute("msg", "ERRO: " + e.getMessage());
                         RequestDispatcher rd = sc.getRequestDispatcher("/erro.jsp");
                         rd.forward(request, response);
                     }
-                }
-                else if (action.equals("formCategoriaProduto"))
-                {
+                } else if (action.equals("formCategoriaProduto")) {
                     // Se possuir idCategoria é novo cadastro
                     // Se não é alteração
-                    try
-                    {
+                    try {
                         String idCategoriaProduto = request.getParameter("idCategoria");
                         if (idCategoriaProduto != null) {
-                            CategoriaProduto categoria = CategoriaProdutoFacade.retornaCategoria(Integer.parseInt(idCategoriaProduto));
+                            CategoriaProduto categoria = CategoriaProdutoFacade
+                                    .retornaCategoria(Integer.parseInt(idCategoriaProduto));
                             request.setAttribute("categoria", categoria);
                         }
-                        RequestDispatcher rd = sc.getRequestDispatcher("/funcionario/categoriaProduto/categoriaProdutoForm.jsp");
+                        RequestDispatcher rd = sc
+                                .getRequestDispatcher("/funcionario/categoriaProduto/categoriaProdutoForm.jsp");
                         rd.forward(request, response);
-                    }
-                    catch (CategoriaProdutoException e)
-                    {
+                    } catch (CategoriaProdutoException e) {
                         request.setAttribute("msg", "ERRO: " + e.getMessage());
                         RequestDispatcher rd = sc.getRequestDispatcher("/erro.jsp");
                         rd.forward(request, response);
                     }
-                }
-                else if (action.equals("new"))
-                {
-                    try
-                    {
+                } else if (action.equals("new")) {
+                    try {
                         CategoriaProduto categoria = new CategoriaProduto();
                         categoria.setNome(request.getParameter("nome"));
                         CategoriaProdutoFacade.adicionaCategoria(categoria);
-                        response.sendRedirect(request.getContextPath() + "/CategoriaProdutoServlet?action=listarCategorias");
-                    }
-                    catch (CategoriaProdutoException e)
-                    {
+                        response.sendRedirect(
+                                request.getContextPath() + "/CategoriaProdutoServlet?action=listarCategorias");
+                    } catch (CategoriaProdutoException e) {
                         request.setAttribute("msg", "ERRO: " + e.getMessage());
                         RequestDispatcher rd = sc.getRequestDispatcher("/erro.jsp");
                         rd.forward(request, response);
                     }
-                }
-                else if (action.equals("update"))
-                {
-                    try
-                    {
+                } else if (action.equals("update")) {
+                    try {
                         CategoriaProduto categoria = new CategoriaProduto();
                         categoria.setIdCategoria(Integer.parseInt(request.getParameter("idCategoria")));
                         categoria.setNome(request.getParameter("nome"));
                         CategoriaProdutoFacade.modificaCategoria(categoria);
-                        response.sendRedirect(request.getContextPath() + "/CategoriaProdutoServlet?action=listarCategorias");
-                    }
-                    catch (CategoriaProdutoException e)
-                    {
+                        response.sendRedirect(
+                                request.getContextPath() + "/CategoriaProdutoServlet?action=listarCategorias");
+                    } catch (CategoriaProdutoException e) {
                         request.setAttribute("msg", "ERRO: " + e.getMessage());
                         RequestDispatcher rd = sc.getRequestDispatcher("/erro.jsp");
                         rd.forward(request, response);
                     }
-                }
-                else if (action.equals("delete"))
-                {
-                    try
-                    {
+                } else if (action.equals("delete")) {
+                    try {
                         int idCategoriaProduto = Integer.parseInt(request.getParameter("idCategoria"));
                         CategoriaProduto categoria = new CategoriaProduto();
                         categoria.setIdCategoria(idCategoriaProduto);
                         CategoriaProdutoFacade.removerCategoria(categoria);
-                        response.sendRedirect(request.getContextPath() + "/CategoriaProdutoServlet?action=listarCategorias");
-                    }
-                    catch (CategoriaProdutoException e)
-                    {
+                        response.sendRedirect(
+                                request.getContextPath() + "/CategoriaProdutoServlet?action=listarCategorias");
+                    } catch (CategoriaProdutoException e) {
                         request.setAttribute("msg", "ERRO: " + e.getMessage());
                         RequestDispatcher rd = sc.getRequestDispatcher("/erro.jsp");
                         rd.forward(request, response);
                     }
-                }
-                else if (action.equals("show")) {
+                } else if (action.equals("show")) {
                     try {
                         int idCategoriaProduto = Integer.parseInt(request.getParameter("idCategoria"));
                         CategoriaProduto categoria = CategoriaProdutoFacade.retornaCategoria(idCategoriaProduto);
                         request.setAttribute("categoria", categoria);
-                        RequestDispatcher rd = getServletContext().getRequestDispatcher("/funcionario/categoriaProduto/categoriaProdutoVisualizar.jsp");
+                        RequestDispatcher rd = getServletContext()
+                                .getRequestDispatcher("/funcionario/categoriaProduto/categoriaProdutoVisualizar.jsp");
                         rd.forward(request, response);
-                    }
-                    catch (CategoriaProdutoException e)
-                    {
+                    } catch (CategoriaProdutoException e) {
                         request.setAttribute("msg", "ERRO: " + e.getMessage());
                         RequestDispatcher rd = sc.getRequestDispatcher("/erro.jsp");
                         rd.forward(request, response);
                     }
                 }
-            }
-            else
-            {
+            } else {
                 RequestDispatcher rd = sc.getRequestDispatcher("/index.jsp");
                 request.setAttribute("msg", "Usuário deve se autentificar para acessar o sistema");
                 rd.forward(request, response);
@@ -160,14 +137,15 @@ public class CategoriaProdutoServlet extends HttpServlet {
         }
     }
 
-    // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
+    // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the
+    // + sign on the left to edit the code.">
     /**
      * Handles the HTTP <code>GET</code> method.
      *
-     * @param request servlet request
+     * @param request  servlet request
      * @param response servlet response
      * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
+     * @throws IOException      if an I/O error occurs
      */
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
@@ -178,10 +156,10 @@ public class CategoriaProdutoServlet extends HttpServlet {
     /**
      * Handles the HTTP <code>POST</code> method.
      *
-     * @param request servlet request
+     * @param request  servlet request
      * @param response servlet response
      * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
+     * @throws IOException      if an I/O error occurs
      */
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
