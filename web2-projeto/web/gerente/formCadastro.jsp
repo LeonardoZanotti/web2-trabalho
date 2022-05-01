@@ -1,8 +1,4 @@
-<%-- 
-    Document   : formCadastro
-    Created on : Jul 31, 2021, 11:02:39 PM
-    Author     : Giulia
---%>
+
 
 <%@page import="java.util.ArrayList"%>
 <%@page import="java.util.List"%>

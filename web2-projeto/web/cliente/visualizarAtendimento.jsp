@@ -1,8 +1,4 @@
-<%-- 
-    Document   : visualizarAtendimentos
-    Created on : 30/07/2021, 17:05:18
-    Author     : jessi
---%>
+
 
 <%@page import="java.util.ArrayList"%>
 <%@page import="java.util.List"%>

@@ -1,7 +1,4 @@
-<%-- 
-    Document   : navegacao
-    Author     : Giulia
---%>
+
 <div class="jumbotron jumbotron-fluid">
     <div class="container">
         <h1>Bem vindo(a), ${logado.getNome()}</h1>
@@ -13,13 +10,13 @@
             <a class="nav-link disabled">Menu</a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" href="${pageContext.request.contextPath}/GerenteServlet?action=portal">Informações Gerenciais</a>
+            <a class="nav-link" href="${pageContext.request.contextPath}/GerenteServlet?action=portal">Informaï¿½ï¿½es Gerenciais</a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" href="${pageContext.request.contextPath}/GerenteServlet?action=todosCadastrados">Lista de Funcionários/Gerentes</a>
+            <a class="nav-link" href="${pageContext.request.contextPath}/GerenteServlet?action=todosCadastrados">Lista de Funcionï¿½rios/Gerentes</a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" href="${pageContext.request.contextPath}/GerenteServlet?action=telaRelatorios">Relatórios</a>
+            <a class="nav-link" href="${pageContext.request.contextPath}/GerenteServlet?action=telaRelatorios">Relatï¿½rios</a>
         </li>
         <li class="nav-item">
             <a class="nav-link" href="${pageContext.request.contextPath}/LogoutServlet">Logout</a>

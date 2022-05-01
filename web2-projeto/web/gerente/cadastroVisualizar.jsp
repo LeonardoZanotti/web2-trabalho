@@ -1,8 +1,4 @@
-<%-- 
-    Document   : cadastroVisualizar
-    Created on : Aug 1, 2021, 6:36:10 PM
-    Author     : Giulia
---%>
+
 
 <%@page import="java.util.ArrayList"%>
 <%@page import="java.util.List"%>

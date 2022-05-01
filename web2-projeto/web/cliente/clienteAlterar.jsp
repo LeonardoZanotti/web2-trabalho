@@ -1,8 +1,4 @@
-<%-- 
-    Document   : clienteAlterar
-    Created on : 31/07/2021, 01:10:03
-    Author     : jessi
---%>
+
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@page import="java.util.ArrayList"%>

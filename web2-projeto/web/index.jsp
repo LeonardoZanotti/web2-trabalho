@@ -1,8 +1,4 @@
-<%-- 
-    Document   : login
-    Created on : 23/07/2021, 21:36:55
-    Author     : jessi
---%>
+
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8" errorPage="/jsp/erro.jsp" %>
 <!DOCTYPE html>
