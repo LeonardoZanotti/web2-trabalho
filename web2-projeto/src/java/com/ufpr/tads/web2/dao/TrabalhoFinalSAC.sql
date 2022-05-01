@@ -5726,12 +5726,12 @@ INSERT INTO Cidade (idCidade, nome, idEstado) VALUES
     (5568, 'Vila Boa', 9),
     (5569, 'Vila Propício', 9),
     (5570, 'Brasília', 7);
-INSERT INTO Endereco VALUES
-	(1, 1, 'Rua Oliveira', 10, 'Casa', 'Centro', 82102312),
-	(2, 448, 'Rua Tereza', 810, 'AP 10', 'Mandirituba', 83645987),
-	(3, 163, 'Avenida Oliveira', 9042, 'AP 24', 'Centro', 44596423),
-	(4, 80, 'Rua Bosque', 3, 'Cd Flores', 'Jardim Flores', 32465879),
-	(5, 1451, 'Rua Presidente Afonso', 140, 'Casa', 'Centro', 82156464);
+INSERT INTO Endereco (idCidade, rua, numero, complemento, bairro, cep) VALUES
+	(1, 'Rua Oliveira', 10, 'Casa', 'Centro', 82102312),
+	(448, 'Rua Tereza', 810, 'AP 10', 'Mandirituba', 83645987),
+	(163, 'Avenida Oliveira', 9042, 'AP 24', 'Centro', 44596423),
+	(80, 'Rua Bosque', 3, 'Cd Flores', 'Jardim Flores', 32465879),
+	(1451, 'Rua Presidente Afonso', 140, 'Casa', 'Centro', 82156464);
 INSERT INTO Pessoa (idEndereco, primeiroNome, sobreNome, cpf, telefone) VALUES
 	(1, 'Maria', 'Sagrado', 52508012009, '41946135412'),
 	(1, 'Tereza', 'Sagrado', 75764997020, '2198451234'),

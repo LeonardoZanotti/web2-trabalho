@@ -10,49 +10,10 @@
 <!DOCTYPE html>
   <html>
     <head>
-     <meta charset="UTF-8"/>
-     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js" integrity="sha384-smHYKdLADwkXOn1EmN1qk/HfnUcbVRZyYmZ4qpPea6sjB/pTJ0euyQp0Mk8ck+5T" crossorigin="anonymous"></script>
-     <link rel="stylesheet" href="${pageContext.request.contextPath}/style.css" /> 
-        <script>
-            $(document).ready(function() {
-                // Puxa as cidades
-                getCidades();
-                
-                // Seta o listener no combo estados
-                $( "#estado" ).change(function() {
-                  getCidades();
-                });         
-                
-            });
-            function getCidades(){
-                var estadoId = $("#estado").val();
-                //alert(estadoId);
-                var url = "/AJAXServlet";
-                $.ajax({
-                        url : url, // URL da sua Servlet
-                        data : {
-                            estadoId : estadoId
-                        }, // Parâmetro passado para a Servlet
-                        dataType : 'json',
-                        success : function(data) {
-                            // Se sucesso, limpa e preenche a combo de cidade
-                            // alert(JSON.stringify(data));
-                            $("#cidade").empty();
-                            $.each(data, function(i, obj) {
-                            $("#cidade").append('<option value=' + obj.id + '')+' >' + obj.nome + '</option>');
-                            });
-                        },
-                        error : function(request, textStatus, errorThrown) {
-                            alert(request.status + ', Error: ' + request.statusText);
-                             // Erro
-                        }
-                    });
-            }
-        </script>
-        
+        <meta charset="UTF-8"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" type="text/css" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+        <link rel="stylesheet" href="${pageContext.request.contextPath}/style.css" /> 
         <title>Cadastro</title>
     </head>
     <body>
@@ -66,7 +27,7 @@
             <div class="col-md-12"> 
                <br><h2> Bem-vinda(o)!</h2>
                <h1 class="title h1 m-0 mt-4 text-center">Insira seus dados</h1><br>
-                <form class="form shadow " action="${pageContext.request.contextPath}/AutoCadastroServlet method="post">     
+                <form class="form shadow " action="${pageContext.request.contextPath}/AutoCadastroServlet" method="post">     
                     <div class="form-group">
                      <div class="row">
 
@@ -138,11 +99,11 @@
                           <div class="form-group">
                               <label for="state">Estado</label>
                               <select class="form-control"  id="estado" name="estado" required><br><br>
-                               <c:forEach var="estado" items="${estado.listaEstados}">
-                            <option value="${estado.id}" ${estado.id == clienteId.cidade.estado.idEstado ? "selected" : ""}>
-                                <c:out value="${estado.sigla} - ${estado.nome}" />
-                            </option>
-                               </c:forEach>
+                               <c:forEach var="estado" items="${listaEstados}">
+                                    <option value="${estado.getId()}"}>
+                                        <c:out value="${estado.nome}"/> 
+                                    </option>
+                                </c:forEach>
                              </select>
                           </div>
                         </div>
@@ -150,12 +111,7 @@
                         <div class="col-sm-6">
                           <div class="form-group">
                             <label for="city">Cidade</label>
-                            <select class="form-control"  id="cidade" name="cidade"   required>
-                                <c:forEach var="cidade" items="${listaCidades}">
-                                    <option value="${cidade.id}">
-                                        <c:out value="${cidade.nome}" />
-                                    </option>
-                                </c:forEach>
+                            <select class="form-control"  id="cidade" name="cidade" required>
                             </select>
                           </div>
                         </div>
@@ -185,7 +141,44 @@
                    </div>   
                   </div>
                  </div>
-                </form>                      
+                </form>   
+            <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+            <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+            <script src="${pageContext.request.contextPath}/js/jquery-mask.min.js"></script>
+            <script type="text/javascript" >
+                $(document).ready(function() {
+                    getCidades();
+                    $( "#estado" ).change(function() {
+                      getCidades();
+                    });
+                });
+
+                function getCidades(){
+                    var idEstado = $("#estado").val();
+                    var url = "AJAXServlet";
+                    $.ajax({
+                            url : url, // URL da sua Servlet
+                            data : {
+                                idEstado : idEstado
+                            }, // Parâmetro passado para a Servlet
+                            dataType : 'json',
+                            success : function(data) {
+                                // Se sucesso, limpa e preenche a combo de cidade
+                                // alert(JSON.stringify(data));
+                                // console.log(data);
+                                $("#cidade").empty();
+                                $.each(data, function(i, obj) {
+                                    $("#cidade").append('<option value=' + obj.idCidade + '>' + obj.nome + '</option>');
+                                });
+                            },
+                            error : function(request, textStatus, errorThrown) {
+                                alert(request.status + ', Error: ' + request.statusText);
+                                 // Erro
+                            }
+                        });
+                }
+            </script>
             </div> 
             <div class= "footer">
                     Em caso de problemas contactar o administrador: <jsp:getProperty name="configuracao" property="email"/>

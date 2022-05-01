@@ -52,14 +52,14 @@ public class AutoCadastroServlet extends HttpServlet {
             try {
                 Endereco endereco = new Endereco();
 
-                Estado estado = EstadoFacade.retornaEstado(Integer.parseInt(request.getParameter("idEstado")));
-                Cidade cidade = CidadeFacade.retornaCidade(Integer.parseInt(request.getParameter("idCidade")));
+                Estado estado = EstadoFacade.retornaEstado(Integer.parseInt(request.getParameter("estado")));
+                Cidade cidade = CidadeFacade.retornaCidade(Integer.parseInt(request.getParameter("cidade")));
                 cidade.setEstado(estado);
                 endereco.setCidade(cidade);
                 endereco.setRua(request.getParameter("rua"));
                 endereco.setNumero(Integer.parseInt(request.getParameter("numero")));
                 endereco.setBairro(request.getParameter("bairro"));
-                endereco.setCep(Integer.parseInt(request.getParameter("cep")));
+                endereco.setCep(Integer.parseInt(request.getParameter("cep").replace(".", "").replace("-", "")));
                 endereco.setComplemento(request.getParameter("complemento"));
 
                 Cliente cliente = new Cliente();
@@ -69,7 +69,7 @@ public class AutoCadastroServlet extends HttpServlet {
                 cliente.setSobreNome(request.getParameter("sobreNome"));
                 cliente.setTelefone(request.getParameter("telefone"));
                 cliente.setSenha(request.getParameter("senha"));
-                cliente.setCpf(Long.parseLong(request.getParameter("cpf")));
+                cliente.setCpf(Long.parseLong(request.getParameter("cpf").replace(".", "").replace("-", "")));
 
                 boolean confereEmail = Ferramentas.confereEmail(request.getParameter("email"));
                 if (confereEmail) {
