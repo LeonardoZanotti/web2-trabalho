@@ -1,8 +1,4 @@
-<%-- 
-    Document   : portal
-    Created on : 27/07/2021, 17:11:50
-    Author     : jessi
---%>
+
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@page import="java.util.ArrayList"%>

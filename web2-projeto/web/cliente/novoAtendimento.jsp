@@ -1,8 +1,4 @@
-<%-- 
-    Document   : atendimentos
-    Created on : 25/07/2021, 14:42:56
-    Author     : jessi
---%>
+
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@page import="java.util.ArrayList"%>

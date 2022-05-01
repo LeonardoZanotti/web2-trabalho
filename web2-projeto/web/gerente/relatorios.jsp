@@ -1,8 +1,4 @@
-<%-- 
-    Document   : relatorios
-    Created on : Aug 1, 2021, 7:15:57 PM
-    Author     : giugu
---%>
+
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@page import="java.util.ArrayList"%>

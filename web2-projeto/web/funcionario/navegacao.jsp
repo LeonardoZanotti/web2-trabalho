@@ -1,7 +1,4 @@
-<%-- 
-    Document   : navegacao
-    Author     : Giulia
---%>
+
 <div class="jumbotron jumbotron-fluid">
     <div class="container">
         <h1>Bem vindo(a), ${logado.getNome()}</h1>

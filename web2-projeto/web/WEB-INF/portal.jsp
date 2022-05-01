@@ -1,8 +1,4 @@
-<%-- 
-    Document   : portal
-    Created on : 27/07/2021, 17:11:50
-    Author     : jessi
---%>
+
 
 
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
