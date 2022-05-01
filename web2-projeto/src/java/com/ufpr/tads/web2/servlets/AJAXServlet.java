@@ -37,36 +37,8 @@ public class AJAXServlet extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        response.setContentType("text/html;charset=UTF-8");
-        try (PrintWriter out = response.getWriter()) {
-
-            String idEstado = request.getParameter("idEstado");
-            ServletContext sc = request.getServletContext();
-
-            try {
-                Estado estado = EstadoFacade.retornaEstado(Integer.parseInt(idEstado));
-                List<Cidade> listaCidades = CidadeFacade.getLista(estado);
-
-                String json = new Gson().toJson(listaCidades);
-
-                response.setContentType("application/json");
-                response.setCharacterEncoding("UTF-8");
-                response.getWriter().write(json);
-            } catch (EstadoException | CidadeException | NumberFormatException e) {
-                request.setAttribute("msg", "ERRO: " + e.getMessage());
-                RequestDispatcher rd = request.getRequestDispatcher("erro.jsp");
-                rd.forward(request, response);
-            }
-        }
-    }
-
-    @Override
-    protected void doGet(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-
         String idEstado = request.getParameter("idEstado");
         ServletContext sc = request.getServletContext();
-
         try {
             Estado estado = EstadoFacade.retornaEstado(Integer.parseInt(idEstado));
             List<Cidade> listaCidades = CidadeFacade.getLista(estado);
@@ -81,6 +53,12 @@ public class AJAXServlet extends HttpServlet {
             RequestDispatcher rd = request.getRequestDispatcher("erro.jsp");
             rd.forward(request, response);
         }
+    }
+
+    @Override
+    protected void doGet(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        processRequest(request, response);
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

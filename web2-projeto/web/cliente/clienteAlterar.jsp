@@ -32,7 +32,7 @@
           <div class="row login">
             <div class="col-md-12"> 
                <h1 class="title h1 m-0 mt-4 text-center">Insira seus dados</h1><br>
-                <form class="form shadow " action="${pageContext.request.contextPath}/ClienteServlet?action=modificaCliente&idCliente=${cliente.idCliente}"" method="post">     
+                <form class="form shadow " action="${pageContext.request.contextPath}/ClienteServlet?action=modificaCliente&idCliente=${cliente.getIdCliente()}"" method="post">     
                     <div class="form-group">
                     <div class="row">
                         <div class="col-sm-6">
@@ -87,24 +87,44 @@
 
                         <div class="col-sm-6">
                           <div class="form-group">
-                              <label for="state">Estado</label>
-                            <select class="custom-select" id="produto" name="produto" required>
-                          <c:forEach var="estado" items="${listaEstados}">
-                            <option value="${estado.id}"}>
-                                <c:out value="${estado.nome}"/> 
-                            </option>
-                          </c:forEach>
-                      </select>   
+                            <label for="state">Estado</label>
+                            <select class="custom-select" id="estado" name="estado" required>
+                                <c:forEach var="estado" items="${listaEstados}">
+                                    <c:choose>
+                                        <c:when test="${estadoCliente.getId() == estado.getId()}">
+                                          <option selected value="${estado.getId()}"}>
+                                              <c:out value="${estado.nome}"/> 
+                                          </option>
+                                        </c:when>
+                                        <c:otherwise>
+                                          <option value="${estado.getId()}"}>
+                                              <c:out value="${estado.nome}"/> 
+                                          </option>
+                                        </c:otherwise>
+                                    </c:choose>
+                                </c:forEach>
+                            </select>   
                           </div>
                         </div>
 
                         <div class="col-sm-6">
                           <div class="form-group">
                             <label for="city">Cidade</label>
-                            <select class="custom-select" id="cidade" name="cidade"  required>
-                                    <option var= "cidade" value="${cidade.idCidade}">
-                                        <c:out value="${cidade.nome}" />
-                                    </option>
+                            <select class="custom-select" id="cidade" name="cidade" required>
+                                <c:forEach var="cidade" items="${listaCidades}">
+                                    <c:choose>
+                                        <c:when test="${cidadeCliente.getId() == cidade.getId()}">
+                                            <option selected var= "cidade" value="${cidade.getId()}">
+                                                <c:out value="${cidade.nome}" />
+                                            </option>
+                                        </c:when>
+                                        <c:otherwise>
+                                            <option var= "cidade" value="${cidade.getId()}">
+                                                <c:out value="${cidade.nome}" />
+                                            </option>
+                                        </c:otherwise>
+                                    </c:choose>
+                                </c:forEach>
                             </select>
                           </div>
                         </div>
@@ -143,21 +163,21 @@
             });
 
             function getCidades(){
-                var estadoId = $("#estado").val();
+                var idEstado = $("#estado").val();
                 var url = "AJAXServlet";
                 $.ajax({
                         url : url, // URL da sua Servlet
                         data : {
-                            estadoId : estadoId
+                            idEstado : idEstado
                         }, // Parâmetro passado para a Servlet
                         dataType : 'json',
                         success : function(data) {
                             // Se sucesso, limpa e preenche a combo de cidade
                             // alert(JSON.stringify(data));
+                            // console.log(data);
                             $("#cidade").empty();
                             $.each(data, function(i, obj) {
-                                
-                                $("#cidade").append('<option value=' + obj.id == '${cliente.endereco.cidade.id}' + '>' + obj.nome + '</option>');
+                                $("#cidade").append('<option value=' + obj.idCidade + '>' + obj.nome + '</option>');
                             });
                         },
                         error : function(request, textStatus, errorThrown) {

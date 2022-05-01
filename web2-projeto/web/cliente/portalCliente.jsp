@@ -45,7 +45,7 @@
                             </div>
                             <div class="col-lg-4">
                                 <h2>Dados<br>Pessoais</h2>
-                                <p><a  class="btn btn-info" href="${pageContext.request.contextPath}/ClienteServlet?action=formModificaCliente">Visualizar</a></p>
+                                <p><a  class="btn btn-info" href="${pageContext.request.contextPath}/ClienteServlet?action=formVisualizaCliente">Visualizar</a></p>
                             </div>
                         </div>    
                     </div>

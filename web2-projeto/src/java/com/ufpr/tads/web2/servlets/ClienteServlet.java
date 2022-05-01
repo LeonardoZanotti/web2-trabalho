@@ -99,7 +99,7 @@ public class ClienteServlet extends HttpServlet {
                         request.setAttribute("cliente", cliente);
                         request.setAttribute("atendimento", atendimento);
 
-                        RequestDispatcher rd = sc.getRequestDispatcher("/cliente/clienteVisualizar.jsp");
+                        RequestDispatcher rd = sc.getRequestDispatcher("/cliente/visualizarAtendimento.jsp");
                         rd.forward(request, response);
                     }
                     catch(AtendimentoException | NumberFormatException | ClienteException e)
@@ -224,19 +224,46 @@ public class ClienteServlet extends HttpServlet {
                         rd.forward(request, response);
                     }
                 }
-                else if (action.equals("formModificaCliente"))
+                else if (action.equals("formVisualizaCliente"))
                 {
                     try
                     {
                         Cliente cliente = ClienteFacade.retornaCliente(logado.getId());
                         request.setAttribute("cliente", cliente);
-                        List<Estado> listaEstados = EstadoFacade.getLista();
-                        request.setAttribute("listaEstados", listaEstados);
+                        Cidade cidade = cliente.getEndereco().getCidade();
+                        Estado estado = cidade.getEstado();
+                        request.setAttribute("cidade", cidade);
+                        request.setAttribute("estado", estado);
 
-                        RequestDispatcher rd = sc.getRequestDispatcher("cliente/clienteAlterar.jsp");
+                        RequestDispatcher rd = sc.getRequestDispatcher("/cliente/clienteVisualizar.jsp");
                         rd.forward(request, response);
                     }
-                    catch(ClienteException | EstadoException e)
+                    catch (ClienteException e)
+                    {
+                        request.setAttribute("msg", "ERRO: " + e.getMessage());
+                        RequestDispatcher rd = sc.getRequestDispatcher("/erro.jsp");
+                        rd.forward(request, response);
+                    }
+                }
+                else if (action.equals("formModificaCliente"))
+                {
+                    try
+                    {
+                        Cliente cliente = ClienteFacade.retornaCliente(logado.getId());
+                        Cidade cidade = cliente.getEndereco().getCidade();
+                        Estado estado = cidade.getEstado();
+                        request.setAttribute("cidadeCliente", cidade);
+                        request.setAttribute("estadoCliente", estado);
+                        request.setAttribute("cliente", cliente);
+                        List<Estado> listaEstados = EstadoFacade.getLista();
+                        List<Cidade> listaCidades = CidadeFacade.getLista(estado);
+                        request.setAttribute("listaEstados", listaEstados);
+                        request.setAttribute("listaCidades", listaCidades);
+
+                        RequestDispatcher rd = sc.getRequestDispatcher("/cliente/clienteAlterar.jsp");
+                        rd.forward(request, response);
+                    }
+                    catch(ClienteException | EstadoException | CidadeException e)
                     {
                         request.setAttribute("msg", "ERRO: " + e.getMessage());
                         RequestDispatcher rd = sc.getRequestDispatcher("/erro.jsp");

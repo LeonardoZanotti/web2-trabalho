@@ -107,26 +107,14 @@
                         <div class="col-sm-6">
                           <div class="form-group">
                               <label for="state">Estado</label>
-                              <select class="form-control"  id="estado" name="estado"  readonly="true"><br><br>
-                                <c:forEach var="estado" items="${listaEstados}">
-                                 <option value="${estado.id}">
-                                <c:out value="${estado.sigla} - ${estado.nome}"/>
-                               </option>
-                                </c:forEach>
-                             </select>
+                              <input class="form-control" name="estado" value="${estado.nome}" readonly="true">
                           </div>
                         </div>
 
                         <div class="col-sm-6">
                           <div class="form-group">
                             <label for="city">Cidade</label>
-                            <select class="form-control"  id="cidade" name="cidade" readonly="true"  >
-                                <c:forEach var="cidade" items="${listaCidades}">
-                                    <option value="${cidade.id}">
-                                        <c:out value="${cidade.nome}" />
-                                    </option>
-                                </c:forEach>
-                            </select>
+                                <input class="form-control" name="cidade" value="${cidade.nome}" readonly="true">
                           </div>
                         </div>
                               
