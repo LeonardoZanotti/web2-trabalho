@@ -1,4 +1,24 @@
- <div class='wrapper page-extra'>
+
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@page import="java.util.ArrayList"%>
+<%@page import="java.util.List"%>
+<%@page import="com.ufpr.tads.web2.beans.Cliente"%>
+<%@page errorPage = "/erro.jsp" %>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ page import="java.util.Date" %>
+<!DOCTYPE html>
+  <html>
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Autocadastro</title>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.0/jquery.mask.js"></script>
+        <link rel="stylesheet" href="${pageContext.request.contextPath}/index.css" /> 
+    </head>
+    <body>
+        <div class='wrapper page-extra'>
           <nav class="top-section navbar">
             <div class="logo">
                 <img
@@ -16,7 +36,7 @@
           
           <div class="container">
               <div class="col-md-16">
-               <h1 class="mt-4">Meus Dados</h1>
+               <h1 class="mt-4">Autocadastro</h1>
                <form class="needs-validation shadow-lg p-3 mb-5 bg-body rounded mt-4" novalidate action="${pageContext.request.contextPath}/AutoCadastroServlet" method="post">  
                 <hr class="featurette-divider">
                 <h3>Dados de Login</h3>
@@ -41,8 +61,10 @@
                                 minlength="2" 
                                 maxlength="50" 
                                 value="${cliente.primeiroNome}"
-                                required
-                                readonly="true">
+                                required>
+                              <div class="invalid-feedback">
+                                Por favor, informe o seu nome.
+                              </div>
                             </div>
                         </div> 
 
@@ -64,9 +86,10 @@
                                     minlength="2"
                                     maxlength="50" 
                                     value="${cliente.sobreNome}"
-                                    required
-                                    readonly="true"
-                                    >
+                                    required>
+                                  <div class="invalid-feedback">
+                                    Por favor, informe o seu sobrenome.
+                                  </div>
                               </div>           
                         </div>
 
@@ -90,8 +113,10 @@
                                   autocomplete="off" maxlength="15"
                                   value="${cliente.telefone}"
                                   required="required"
-                                   readonly="true"
-                                    />
+                                />
+                              <div class="invalid-feedback">
+                                Por favor, informe um número para contato.
+                              </div>
                             </div>
                         </div>
 
@@ -400,3 +425,5 @@
                 </div>          
             </div>   
         </div>
+    </body>
+ </html>

@@ -1,4 +1,32 @@
- <div class='wrapper page-extra'>
+
+
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@page import="java.util.ArrayList"%>
+<%@page import="java.util.List"%>
+<%@page import="com.ufpr.tads.web2.beans.Cliente"%>
+<%@page import="com.ufpr.tads.web2.beans.Endereco"%>
+<%@page import="com.ufpr.tads.web2.beans.Cidade"%>
+<%@page import="com.ufpr.tads.web2.beans.Estado"%>
+<%@page errorPage = "/erro.jsp" %>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ page import="java.util.Date" %>
+<!DOCTYPE html>
+  <html>
+    <head>
+          <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Visualizar Dados</title>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.0/jquery.mask.js"></script>
+        <link rel="stylesheet" href="${pageContext.request.contextPath}/index.css" /> 
+    </head>
+    <body>
+        <c:if test="${empty sessionScope.logado}">
+            <c:set var="msg" value="Você deve fazer login para acessar o sistema." scope="request"/>
+            <jsp:forward page="index.jsp"/>
+        </c:if>
+        <div class='wrapper page-extra'>
           <nav class="top-section navbar">
             <div class="logo">
                 <img
@@ -11,18 +39,17 @@
                  title=" "
                 />
             </div>
-            <a href="${pageContext.request.contextPath}/LogoutServlet" class="float-right btn btn-danger rounded">Voltar</a>
-          </nav>   
-          
-          <div class="container">
-              <div class="col-md-16">
-               <h1 class="mt-4">Meus Dados</h1>
-               <form class="needs-validation shadow-lg p-3 mb-5 bg-body rounded mt-4" novalidate action="${pageContext.request.contextPath}/AutoCadastroServlet" method="post">  
-                <hr class="featurette-divider">
-                <h3>Dados de Login</h3>
-                <hr class="featurette-divider"><br>  
-                <div class="form-group">
-                  <div class="row">
+            <a href="${pageContext.request.contextPath}/ClienteServlet?action=portal" class="float-right btn btn-danger rounded">Voltar</a>
+          </nav>    
+        <div class="container">
+          <div class="row login">
+            <div class="col-md-12"> 
+               <h1 class="title h1 m-0 mt-4 text-center">Meus dados</h1><br>
+                <form class="needs-validation shadow-lg p-3 mb-5 bg-body rounded mt-4" action="${pageContext.request.contextPath}/ClienteServlet?action=formModificaCliente" method="post">     
+                  <input type="hidden" name="entity" value="${cliente.getIdCliente()}">
+                    <div class="form-group">
+                    <div class="row">
+
                         <div class="col-md-6 mb-3">
                           <label for="fistName">Primeiro nome</label>
                             <div class="input-group">
@@ -70,7 +97,7 @@
                               </div>           
                         </div>
 
-                        <div class="col-md-6 mb-3">
+                         <div class="col-md-6 mb-3">
                           <label for="phone1">Telefone</label>
                             <div class="input-group">
                               <div class="input-group-prepend">
@@ -90,8 +117,8 @@
                                   autocomplete="off" maxlength="15"
                                   value="${cliente.telefone}"
                                   required="required"
-                                   readonly="true"
-                                    />
+                                  readonly="true"
+                                    >
                             </div>
                         </div>
 
@@ -114,14 +141,12 @@
                                     autocomplete="off" 
                                     maxlength="14" 
                                     value="${cliente.cpf}"
-                                />
-                                <div class="invalid-feedback">
-                                      Por favor, informe o seu CPF.
-                                </div>
+                                    readonly="true"
+                                    >
                             </div>
                         </div>
 
-                        <div class="col-md-12 mb-3">
+                                     <div class="col-md-12 mb-3">
                             <label for="cpf">Logradouro</label>
                               <div class="input-group">
                                 <div class="input-group-prepend">
@@ -140,10 +165,8 @@
                                 autocomplete="off"  
                                 maxlength="50" 
                                 value="${cliente.endereco.rua}"
-                              />
-                              <div class="invalid-feedback">
-                                Por favor, informe um logradouro válido.
-                              </div>
+                                readonly="true"
+                                    >
                            </div>
                       </div>
                               
@@ -167,10 +190,8 @@
                               autocomplete="off" 
                               maxlength="15" 
                               value="${cliente.endereco.numero}"
-                            />
-                            <div class="invalid-feedback">
-                              Por favor, informe um número válido.
-                            </div>
+                              readonly="true"
+                                    >
                           </div>
                       </div>
 
@@ -194,10 +215,8 @@
                                 minlength="2"  
                                 maxlength="20" 
                                 value="${cliente.endereco.bairro}"
-                              />
-                            <div class="invalid-feedback">
-                              Por favor, informe um Bairro válido.
-                            </div>
+                                readonly="true"
+                                    >
                           </div>
                       </div>
 
@@ -218,14 +237,12 @@
                                    required="true" 
                                    maxlength="50" 
                                    value="${cliente.endereco.complemento}"
-                                >
-                              <div class="invalid-feedback">
-                                Por favor, informe um complemento.
-                              </div>
+                                   readonly="true"
+                                    >
                           </div>
                       </div>
 
-                      <div class="col-md-6 mb-3">
+                        <div class="col-md-6 mb-3">
                         <label for="cep">CEP</label>
                         <div class="input-group">
                           <div class="input-group-prepend">
@@ -245,55 +262,26 @@
                               required="true" 
                               maxlength="10" 
                               value="${cliente.endereco.cep}"
-                            />
-                          <div class="invalid-feedback">
-                            Por favor, informe um CEP válido.
-                          </div>
+                              readonly="true"
+                                    >
                         </div>
                       </div>
 
-                      <div class="col-sm-6">
-                        <div class="form-group">
-                          <label for="state">Estado</label>
-                            <select class="form-control"  id="estado" name="estado" required><br><br>
-                              <c:forEach var="estado" items="${listaEstados}">
-                                  <option value="${estado.getId()}"}>
-                                    <c:out value="${estado.nome}"/> 
-                                  </option>
-                              </c:forEach>
-                            </select>
+                        <div class="col-sm-6">
+                          <div class="form-group">
+                              <label for="state">Estado</label>
+                              <input class="form-control" name="estado" value="${estado.nome}" readonly="true">
+                          </div>
                         </div>
-                      </div>
 
-                      <div class="col-sm-6">
-                        <div class="form-group">
-                          <label for="city">Cidade</label>
-                            <select class="form-control"  id="cidade" name="cidade" required> </select>
+                        <div class="col-sm-6">
+                          <div class="form-group">
+                            <label for="city">Cidade</label>
+                                <input class="form-control" name="cidade" value="${cidade.nome}" readonly="true">
+                          </div>
                         </div>
-                      </div>
-                            
-                     <div class="col-md-12 mb-3">
-                      <label for="email">Email</label>
-                        <div class="input-group">
-                          <div class="input-group-prepend">
-                            <span class="input-group-text" id="inputGroupPrepend">@</span>
-                          </div>
-                            <input
-                              type="email"
-                              class="form-control"
-                              id="email" 
-                              name="email" 
-                              required="true"  
-                              maxlength="25" 
-                              value="${cliente.email}"
-                            />
-                          <div class="invalid-feedback">
-                            Por favor, preencha com o seu email.
-                          </div>
-                      </div>
-                    </div>
-                          
-                    <div class="col-md-6 mb-3">
+                              
+                         <div class="col-md-6 mb-3">
                       <label for="password">Senha</label>
                         <div class="input-group">
                           <div class="input-group-prepend">
@@ -308,95 +296,56 @@
                               minlength="6" 
                               autocomplete="off"
                               value="${cliente.senha}"
-                            />
-                          <div class="invalid-feedback">
-                            Por favor, informe uma senha válida.
-                          </div>
+                              readOnly="true"
+                            >
                         </div> 
                     </div> 
-                    <div class="col-sm-6">
-                        <div class="form-group">
-                            <div class="row align-items-center">
-                                <div class="col-sm-6 mt-3 mt-sm-0"><br>
-                                    <button
-                                     type="submit"
-                                     class="btn btn-success btn-lg btn-block">
-                                     Salvar
-                                    </button>
-                                </div>
-                            </div>
-                        </div>
-                   </div> 
-                 </div>
-               </form><br>   
-                  <div class="footer">
+                            
+                         <div class="col-md-12 mb-3">
+                      <label for="email">Email</label>
+                        <div class="input-group">
+                          <div class="input-group-prepend">
+                            <span class="input-group-text" id="inputGroupPrepend">@</span>
+                          </div>
+                            <input
+                              type="email"
+                              class="form-control"
+                              id="email" 
+                              name="email" 
+                              required="true"  
+                              maxlength="25" 
+                              value="${cliente.email}"
+                              readOnly="true"
+                              >
+                      </div>
+                    </div>
+                     <div class="col-sm-6">
+                      <div class="footer">
                       Em caso de problemas contactar o administrador:
                       <a href="mailto:${configuracao.email}">
                       <c:out value="${configuracao.email}" /> </a>
-                  </div><br>
-                  
-                <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-                <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
-                <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-                <script src="${pageContext.request.contextPath}/js/jquery-mask.min.js"></script>
-                <script type="text/javascript" >
-                    $(document).ready(function() {
-                        getCidades();
-                        $( "#estado" ).change(function() {
-                          getCidades();
-                        });
-                    });
-
-                    function getCidades(){
-                        var idEstado = $("#estado").val();
-                        var url = "AJAXServlet";
-                        $.ajax({
-                                url : url, // URL da sua Servlet
-                                data : {
-                                    idEstado : idEstado
-                                }, // Parâmetro passado para a Servlet
-                                dataType : 'json',
-                                success : function(data) {
-                                    // Se sucesso, limpa e preenche a combo de cidade
-                                    // alert(JSON.stringify(data));
-                                    // console.log(data);
-                                    $("#cidade").empty();
-                                    $.each(data, function(i, obj) {
-                                        $("#cidade").append('<option value=' + obj.idCidade + '>' + obj.nome + '</option>');
-                                    });
-                                },
-                                error : function(request, textStatus, errorThrown) {
-                                    alert(request.status + ', Error: ' + request.statusText);
-                                     // Erro
-                                }
-                            });
-                         }
-                         // Exemplo de JavaScript inicial para desativar envios de formulário, se houver campos inválidos.
-                        (function() {
-                          'use strict';
-                          window.addEventListener('load', function() {
-                            // Pega todos os formulários que nós queremos aplicar estilos de validação Bootstrap personalizados.
-                            var forms = document.getElementsByClassName('needs-validation');
-                            // Faz um loop neles e evita o envio
-                            var validation = Array.prototype.filter.call(forms, function(form) {
-                              form.addEventListener('submit', function(event) {
-                                if (form.checkValidity() === false) {
-                                  event.preventDefault();
-                                  event.stopPropagation();
-                                }
-                                form.classList.add('was-validated');
-                              }, false);
-                            });
-                          }, false);
-                        })();
-
-                        jQuery(function($){
-                        $("#phone1").mask("(99) 99999-9999");
-                        $("#cpf").mask("999.999.999-99");
-                        $("#cep").mask("99.999-999");
-                        });
-                       </script>
-                    </div>                         
-                </div>          
-            </div>   
-        </div>
+                    </div>  
+                   </div>
+                    <div class="col-sm-9">
+                          <div class="form-group">
+                            <div class="row align-items-center">
+                                <div class="col-sm-6 mt-4 mt-sm-0"><br>
+                                  <a href="${pageContext.request.contextPath}/AutoCadastroServlet">
+                                  <button type="submit"  class="btn btn-secondary" > Editar </button>
+                            </div>
+                          </div>
+                        </div>
+                        </div> 
+                       </div>
+                      </div>
+                     </form>
+                 </div>                  
+               </div>          
+             </div>   
+             </div>
+            <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+            <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+            <script src="${pageContext.request.contextPath}/js/jquery-mask.min.js"></script>
+    </body>
+ </html>

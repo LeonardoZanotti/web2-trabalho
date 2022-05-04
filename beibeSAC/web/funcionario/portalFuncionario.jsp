@@ -1,80 +1,3 @@
-<!DOCTYPE html>
-<html lang="pt">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Produtos</title>
-    <link rel="stylesheet" type="text/css" href="../../assets/styles/index.css" />
-  </head>
-  <body>
-    <nav class="top-section navbar">
-      <div class="logo">
-        <img
-          src="../../assets/imagens/coroa-logo.png"
-          width="25%"
-          height="25%"
-          background="#777"
-          color="#777"
-          text=" "
-          title=" "
-        />
-      </div>
-    </nav>
-    <div class="container">
-      <div class="">
-        <div class="col-md-12 mt-4">
-          <div class="row align-items-start">
-            <div class="col-9">
-              <h1>Categorias</h1>
-            </div>
-            
-            <div class="col-3 d-flex justify-content-end">
-               <a class="btn btn-primary"  href="${pageContext.request.contextPath}/CategoriaProdutoServlet?action=formCategoriaProduto role="button">
-                 <button type="button" class="btn btn-secondary">Novo</button>
-              </a>
-            </div>
-          </div>
-          <table class="table mt-4" style="max-width: 100%">
-            <thead>
-              <tr>
-                <th scope="col">#</th>
-                <th scope="col">Nome</th>
-                <th scope="col">Ação</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <th scope="row">1</th>
-                <td>Rosto</td>
-                <td>
-                  <a class="btn btn-info" href="${pageContext.request.contextPath}/ProdutoServlet?action=show&idProduto=${produto.idProduto}">
-                   <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-eye-fill" viewBox="0 0 16 16">
-                      <path d="M10.5 8a2.5 2.5 0 1 1-5 0 2.5 2.5 0 0 1 5 0z"/>
-                      <path d="M0 8s3-5.5 8-5.5S16 8 16 8s-3 5.5-8 5.5S0 8 0 8zm8 3.5a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7z"/>
-                    </svg>
-                  </a>
-
-                   <a class="btn btn-success"  href="${pageContext.request.contextPath}/ProdutoServlet?action=formProduto&idProduto=${produto.idProduto}">
-                   <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pen-fill" viewBox="0 0 16 16">
-                    <path d="m13.498.795.149-.149a1.207 1.207 0 1 1 1.707 1.708l-.149.148a1.5 1.5 0 0 1-.059 2.059L4.854 14.854a.5.5 0 0 1-.233.131l-4 1a.5.5 0 0 1-.606-.606l1-4a.5.5 0 0 1 .131-.232l9.642-9.642a.5.5 0 0 0-.642.056L6.854 4.854a.5.5 0 1 1-.708-.708L9.44.854A1.5 1.5 0 0 1 11.5.796a1.5 1.5 0 0 1 1.998-.001z"/>
-                   </svg>
-                 </a>
-                 <a class="btn btn-danger" href="${pageContext.request.contextPath}/ProdutoServlet?action=delete&idProduto=${produto.idProduto}" onclick="return confirm('Confirma a exclusão da categoria ${produto.nome}?')">
-                   <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash-fill" viewBox="0 0 16 16">
-                    <path d="M2.5 1a1 1 0 0 0-1 1v1a1 1 0 0 0 1 1H3v9a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V4h.5a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H10a1 1 0 0 0-1-1H7a1 1 0 0 0-1 1H2.5zm3 4a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 .5-.5zM8 5a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7A.5.5 0 0 1 8 5zm3 .5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 1 0z"/>
-                   </svg>
-                 </a>
-                </td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-      </div>
-    </div>
-  </body>
-</html>
-
-
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@page import="java.util.ArrayList"%>
 <%@page import="java.util.List"%>
@@ -127,20 +50,21 @@
             </ul>
         </nav>
           <div class="container"><br>
+            <h1>Olá! ${logado.getNome()}!</h1>
             <a href="${pageContext.request.contextPath}/LogoutServlet" class="float-right btn btn-danger rounded">Sair</a>
-            <br>
+            </br>
             <h2>Atendimentos Abertos</h2>
             </br>
             <table class="table table-striped">
                 <thead>
                     <tr>
+                        <th>#</th>
                         <th>Cliente</th>
                         <th>Produto</th>
                         <th>Tipo de Atendimento</th>
                         <th>Situação</th>
                         <th>Data/Hora Início</th>
                         <th></th>
-
                     </tr>
                 </thead>
                 <tbody>
@@ -150,20 +74,21 @@
                         <fmt:formatDate value="${now}" pattern="yyyyMMdd" var="agora"/> 
                         <fmt:formatDate value="${atendimento.dataHoraInicio.getTime()}" var="dataInicial" pattern="yyyyMMdd" />
                         <c:if test="${(agora - dataInicial) >= 7}">
-                            <c:set value="red" var="color"/>
+                            <c:set value="#FF0000" var="color"/>
                         </c:if>
                         <c:if test="${(agora - dataInicial) < 7}">
-                            <c:set value="light-grey" var="color"/>
+                            <c:set value="#bfa95a" var="color"/>
                         </c:if>
-
-                    <tr style="background-color: ${color}">
+                        
+                    <tr>
+                        <td><c:out value="${atendimento.idAtendimento}"/></td>
                         <td><c:out value="${atendimento.cliente.primeiroNome} ${atendimento.cliente.sobreNome}"/></td>
                         <td><c:out value="${atendimento.produto.nome}"/></td>
                         <td><c:out value="${atendimento.tipoAtendimento.nome}"/></td>
-                        <td><c:out value="${atendimento.situacao.estado}"/></td>
+                        <td style="background-color: ${color}"><c:out value="${atendimento.situacao.estado}"/></td>
                         <td><fmt:formatDate value="${atendimento.dataHoraInicio.getTime()}" pattern="dd/MM/yyyy HH:mm"/></td>
                         <td>
-                            <a href="${pageContext.request.contextPath}/FuncionarioServlet?action=formResolverAtendimento&idAtendimento=${atendimento.idAtendimento}"><button>Resolver</button></a>
+                            <a href="${pageContext.request.contextPath}/FuncionarioServlet?action=formResolverAtendimento&idAtendimento=${atendimento.idAtendimento}"><button class="btn btn-success btn btn-block">Resolver</button></a>
                         </td>
                     </tr>
                 </c:forEach>
@@ -177,7 +102,3 @@
         </div>  
     </body>
 </html>
-
-
-   
-   

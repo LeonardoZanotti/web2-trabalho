@@ -1,5 +1,3 @@
-
-
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@page import="java.util.ArrayList"%>
 <%@page import="java.util.List"%>
@@ -51,12 +49,12 @@
             </ul>
         </nav>
         <div class="container">
+            <a href="${pageContext.request.contextPath}/LogoutServlet">
+                <br> <button type="button" class="btn btn-danger">Sair</button>
+            </a>
             <div class="container">
                 </br>
-                <h2>Informações Gerenciais</h2>
-                </br>
-
-
+                <h3> Tipo de Atendimentos</h3>
                 <hr>
                 <div class="row">
                     <div class="col-sm">
@@ -89,8 +87,11 @@
                             </div>
                         </div>
                     </div>
-                    <hr>
-                                    <div class="row">
+                </div><br>
+                <h4> Visão Geral</h4>
+                <hr>
+
+                <div class="row">
                     <div class="col-sm">
                         <div class="card text-center">
                             <div class="card-header">
@@ -122,9 +123,8 @@
                         </div>
                     </div>
                 </div>
-                </div>
             </div> 
-                <div class="footer">
+            <div class="footer">
                 Em caso de problemas contactar o administrador:
                 <a href="mailto:${configuracao.email}">
                 <c:out value="${configuracao.email}" /> </a>

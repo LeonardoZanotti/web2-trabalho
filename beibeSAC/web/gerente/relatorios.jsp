@@ -1,5 +1,3 @@
-
-
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@page import="java.util.ArrayList"%>
 <%@page import="java.util.List"%>
@@ -12,14 +10,14 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title>Gerente</title>
+        <title>Relatórios</title>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-        <link rel="stylesheet" href="${pageContext.request.contextPath}/index.css" />
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+        <link rel="stylesheet" href="${pageContext.request.contextPath}/index.css" /> 
     </head>
     <body>
         <c:if test="${empty sessionScope.logado}">
@@ -51,84 +49,55 @@
             </ul>
         </nav>
         <div class="container">
-            <div class="container">
-                </br>
-                <h2>Informações Gerenciais</h2>
-                </br>
+            </br>
+            <h2>Relatórios</h2>
+            </br>
 
-
-                <hr>
+            <div class="row">
                 <div class="row">
                     <div class="col-sm">
-                        <div class="card text-center">
-                            <div class="card-header">
-                                <h5>${elogio.nome}</h5>
-                            </div>
+                        <div class="card">
                             <div class="card-body">
-                                <h5 class="card-title"><c:out value="${qtdAtendimentosAbertosElogio}"/>/<c:out value="${qtdAtendimentosElogio}"/></h5>
+                                <h5 class="card-title">Relatório de Funcionários</h5>
+                                <p class="card-text">Funcionários e seus dados.</p>
+                                <a href="${pageContext.request.contextPath}/GeradorRelatorioServlet?action=relatorioFuncionarios" target="_blank" class="btn btn-success btn-lg btn-block">Exportar</a>
                             </div>
                         </div>
                     </div>
                     <div class="col-sm">
-                        <div class="card text-center">
-                            <div class="card-header">
-                                <h5>${reclamacao.nome}</h5>
-                            </div>
+                        <div class="card">
                             <div class="card-body">
-                                <h5 class="card-title"><c:out value="${qtdAtendimentosAbertosReclamacao}"/>/<c:out value="${qtdAtendimentosReclamacao}"/></h5>
+                                <h5 class="card-title">Relatório de Reclamações</h5>
+                                <p class="card-text">Reclamações dos produtos.</p>
+                                <a href="${pageContext.request.contextPath}/GeradorRelatorioServlet?action=relatorioReclamacoes" target="_blank" class="btn btn-success btn-lg btn-block">Exportar</a>
                             </div>
                         </div>
                     </div>
                     <div class="col-sm">
-                        <div class="card text-center">
-                            <div class="card-header">
-                                <h5>${sugestao.nome}</h5>
-                            </div>
+                        <div class="card">
                             <div class="card-body">
-                                <h5 class="card-title"><c:out value="${qtdAtendimentosAbertosSugestao}"/>/<c:out value="${qtdAtendimentosSugestao}"/></h5>
-                            </div>
-                        </div>
-                    </div>
-                    <hr>
-                                    <div class="row">
-                    <div class="col-sm">
-                        <div class="card text-center">
-                            <div class="card-header">
-                                <h5>Atendimentos efetuados (total):</h5>
-                            </div>
-                            <div class="card-body">
-                                <h5 class="card-title"><c:out value="${qtdAtendimentos}"/></h5>
+                                <h5 class="card-title">Relatório de Produtos Mais Reclamados</h5>
+                                <p class="card-text">Três produtos da empresa com mais reclamações.</p>
+                                <a href="${pageContext.request.contextPath}/GeradorRelatorioServlet?action=relatorioMaisReclamados" target="_blank" class="btn btn-success btn-lg btn-block">Exportar</a>
                             </div>
                         </div>
                     </div>
                     <div class="col-sm">
-                        <div class="card text-center">
-                            <div class="card-header">
-                                <h5>Atendimentos em Aberto:</h5>
-                            </div>
+                        <div class="card">
                             <div class="card-body">
-                                <h5 class="card-title"><c:out value="${qtdAtendimentosAbertos}"/></h5>
+                                <h5 class="card-title">Relatório de Atendimentos em Aberto Por Data</h5>
+                                <p class="card-text">Todos os atendimentos em aberto com cliente e dados do atendimento.</p>
+                                <a href="${pageContext.request.contextPath}/GeradorRelatorioServlet?action=relatorioAtendimentosAbertos" target="_blank" class="btn btn-success btn-lg btn-block">Exportar</a>
                             </div>
                         </div>
                     </div>
-                    <div class="col-sm">
-                        <div class="card text-center">
-                            <div class="card-header">
-                                <h5>Porcentagem em Relação ao Total:</h5>
-                            </div>
-                            <div class="card-body">
-                                <h5 class="card-title"><c:out value="${percentualAtendimentosAbertos}"/>%</h5>
-                            </div>
-                        </div>
-                    </div>
-                </div>
                 </div>
             </div> 
-                <div class="footer">
-                Em caso de problemas contactar o administrador:
-                <a href="mailto:${configuracao.email}">
-                <c:out value="${configuracao.email}" /> </a>
-            </div><br>              
-        </div>  
-    </body>
+            <div class="footer">
+        Em caso de problemas contactar o administrador:
+        <a href="mailto:${configuracao.email}">
+        <c:out value="${configuracao.email}" /> </a>               
+        </div> 
+    </div><br> 
+    </body> 
 </html>
