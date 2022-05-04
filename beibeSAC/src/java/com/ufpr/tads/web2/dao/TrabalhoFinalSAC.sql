@@ -5735,24 +5735,24 @@ INSERT INTO Endereco (idCidade, rua, numero, complemento, bairro, cep) VALUES
 INSERT INTO Pessoa (idEndereco, primeiroNome, sobreNome, cpf, telefone) VALUES
 	(1, 'Maria', 'Andrade', 52508012009, '41946135412'),--Gerente
 	(1, 'João', 'Silva', 75764997020, '2198451234'),--Gerente
-	(2, 'Pedro', 'Tafarel', 42221024079, '41302546130'),--Funcionario
-	(3, 'Marta', 'Silva', 49004691065, '1494125463'),--Funcionario
-	(4, 'João', 'Souza', 81534180095, '41948756316'),--Cliente
-	(5, 'Lisandra', 'Pereira', 97870419028, '5541234541');--Cliente
+	(2, 'Pedro', 'Lucas', 42221024079, '41302546130'),--Funcionario
+	(3, 'Marta', 'Alves', 49004691065, '1494125463'),--Funcionario
+	(4, 'João', 'Ribeiro', 81534180095, '41948756316'),--Cliente
+	(5, 'Rita', 'Pereira', 97870419028, '5541234541');--Cliente
 INSERT INTO Gerente (idPessoa, email, senha) VALUES
-	(1, 'maria@mail.com.br','93F82E739E7418E6107DA4051FB5DD8223707E3887AA27DFD32C8855E80D77F7'),--Teste123@
-	(2, 'joao@mail.com.br','93F82E739E7418E6107DA4051FB5DD8223707E3887AA27DFD32C8855E80D77F7');
+	(1, 'maria@ger.com.br','93F82E739E7418E6107DA4051FB5DD8223707E3887AA27DFD32C8855E80D77F7'),--Teste123@
+	(2, 'joao@ger.com.br','93F82E739E7418E6107DA4051FB5DD8223707E3887AA27DFD32C8855E80D77F7');
 INSERT INTO Funcionario (idPessoa, email, senha) VALUES
-	(3, 'pedro@sac.com.br','93F82E739E7418E6107DA4051FB5DD8223707E3887AA27DFD32C8855E80D77F7'),
-	(4, 'marta@sac.com.br','93F82E739E7418E6107DA4051FB5DD8223707E3887AA27DFD32C8855E80D77F7');
+	(3, 'pedro@func.com.br','93F82E739E7418E6107DA4051FB5DD8223707E3887AA27DFD32C8855E80D77F7'),
+	(4, 'marta@func.com.br','93F82E739E7418E6107DA4051FB5DD8223707E3887AA27DFD32C8855E80D77F7');
 INSERT INTO Cliente (idPessoa, email, senha) VALUES
 	(5, 'joao@mail.com.br','93F82E739E7418E6107DA4051FB5DD8223707E3887AA27DFD32C8855E80D77F7'),
-	(6, 'lisandra@mail.com.br','93F82E739E7418E6107DA4051FB5DD8223707E3887AA27DFD32C8855E80D77F7');
+	(6, 'rita@mail.com.br','93F82E739E7418E6107DA4051FB5DD8223707E3887AA27DFD32C8855E80D77F7');
 INSERT INTO Atendimento (idCliente, idFuncionario, idProduto, idTipoAtendimento, idSituacao, dataHoraInicio, reclamacao) VALUES
 	(1, 1, 1, 1, 1, '2022-04-22 19:10:25-07', 'Não recebi o produto'),
 	(2, 2, 2, 2, 1, '2022-04-09 19:10:25-07', 'Produto com defeito'),
 	(1, 1, 1, 1, 1, '2022-04-03 19:10:25-07', 'Não recebi o produto');
 INSERT INTO Atendimento (idCliente, idFuncionario, idProduto, idTipoAtendimento, idSituacao, dataHoraInicio, dataHoraFim, reclamacao) VALUES
-	(1, 1, 4, 1, 2, '2022-05-12 19:10:25-07', '2021-05-30 19:10:25-07', 'Não recebi o produto'),
+	(1, 1, 4, 1, 2, '2022-04-12 19:10:25-07', '2021-05-30 19:10:25-07', 'Não recebi o produto'),
 	(2, 2, 4, 2, 2, '2022-04-04 19:10:25-07', '2021-06-15 19:10:25-07', 'Produto com defeito');
 	

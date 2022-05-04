@@ -19,6 +19,7 @@
         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
         <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.0/jquery.mask.js"></script>
+        
     </head>
     <body>
         <c:if test="${empty sessionScope.logado}">
@@ -110,6 +111,7 @@
                 <input type="text" class="form-control" name="cidade" value="${cadastrado.endereco.cidade.nome}" readonly>
             </div>
             <div>
+                  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.0/jquery.mask.js"></script>
                 <script>
                         jQuery(function($){
                         $("#phone1").mask("(99) 99999-9999");

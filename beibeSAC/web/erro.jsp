@@ -35,11 +35,9 @@
         </div>
     </div>
 </body>
-<footer style="position: fixed; bottom: 0;">
-    <div class="container" style="background-color: rgba(0, 0, 0, 0.10);">
-        <div class="text-center p-0">
-            Em caso de problemas contactar o administrador: <jsp:getProperty name="configuracao" property="email"/>
-        </div>
-    </div>
-</footer>
+   <div class="footer">
+        Em caso de problemas contactar o administrador:
+        <a href="mailto:${configuracao.email}">
+        <c:out value="${configuracao.email}" /> </a>
+        </div><br>
 </html>

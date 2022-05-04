@@ -85,8 +85,8 @@
                     <c:forEach var="funcionario" items="${listaFuncionarios}">  
                         <tr>
                             <td><c:out value="${funcionario.primeiroNome} ${funcionario.sobreNome}"/></td>
-                            <td><c:out value="${funcionario.cpf}"/></td>
-                            <td><c:out value="${funcionario.telefone}"/></td>
+                            <td  data-mask="000.000.000-00"><c:out value="${funcionario.cpf}"/></td>
+                            <td data-mask="(00) 00000-0009"><c:out value="${funcionario.telefone}"/></td>
                             <td><c:out value="${funcionario.email}"/></td>
                             <td>
                                 <a class="btn btn-info" href="${pageContext.request.contextPath}/GerenteServlet?action=visualizarCadastro&idCadastrado=${funcionario.idFuncionario}&tipo=funcionario">
@@ -112,21 +112,33 @@
                     <c:forEach var="gerente" items="${listaGerentes}">  
                         <tr>
                             <td><c:out value="${gerente.primeiroNome} ${gerente.sobreNome}"/></td>
-                            <td><c:out value="${gerente.cpf}"/></td>
-                            <td><c:out value="${gerente.telefone}"/></td>
+                            <td  data-mask="000.000.000-00"><c:out value="${gerente.cpf}"/></td>
+                            <td  data-mask="(00) 00000-0009"><c:out value="${gerente.telefone}"/></td>
                             <td><c:out value="${gerente.email}"/></td>
                             <td>
-                                <a href="${pageContext.request.contextPath}/GerenteServlet?action=visualizarCadastro&idCadastrado=${gerente.idGerente}&tipo=gerente"><img src="<c:url value="/img/visualizar.png"/>" width="30" height="30"/></a>
-                                <a href="${pageContext.request.contextPath}/GerenteServlet?action=formAlterarGerente&idCadastrado=${gerente.idGerente}"><img src="<c:url value="/img/alterar.png"/>" width="30" height="30"/></a>
-                                <a href="${pageContext.request.contextPath}/GerenteServlet?action=removerGerente&idGerente=${gerente.idGerente}" 
-                                   onclick="return confirm('Confirma a exclusão do Gerente ${gerente.primeiroNome} ${gerente.sobreNome}?')">
-                                    <img src="<c:url value="/img/remover.png"/>" width="30" height="30"/>
+                                <a class="btn btn-info" href="${pageContext.request.contextPath}/GerenteServlet?action=visualizarCadastro&idCadastrado=${gerente.idGerente}&tipo=gerente">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-eye-fill" viewBox="0 0 16 16">
+                                        <path d="M10.5 8a2.5 2.5 0 1 1-5 0 2.5 2.5 0 0 1 5 0z"/>
+                                        <path d="M0 8s3-5.5 8-5.5S16 8 16 8s-3 5.5-8 5.5S0 8 0 8zm8 3.5a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7z"/>
+                                    </svg>
                                 </a>
+                                <a class="btn btn-success"  href="${pageContext.request.contextPath}/GerenteServlet?action=formAlterarGerente&idCadastrado=${gerente.idGerente}">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pen-fill" viewBox="0 0 16 16">
+                                        <path d="m13.498.795.149-.149a1.207 1.207 0 1 1 1.707 1.708l-.149.148a1.5 1.5 0 0 1-.059 2.059L4.854 14.854a.5.5 0 0 1-.233.131l-4 1a.5.5 0 0 1-.606-.606l1-4a.5.5 0 0 1 .131-.232l9.642-9.642a.5.5 0 0 0-.642.056L6.854 4.854a.5.5 0 1 1-.708-.708L9.44.854A1.5 1.5 0 0 1 11.5.796a1.5 1.5 0 0 1 1.998-.001z"/>
+                                    </svg>
+                                </a>
+                                <a class="btn btn-danger"  href="${pageContext.request.contextPath}/GerenteServlet?action=removerGerente&idGerente=${gerente.idGerente}" 
+                                   onclick="return confirm('Confirma a exclusão do Gerente ${gerente.primeiroNome} ${gerente.sobreNome}?')">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash-fill" viewBox="0 0 16 16">
+                                        <path d="M2.5 1a1 1 0 0 0-1 1v1a1 1 0 0 0 1 1H3v9a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V4h.5a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H10a1 1 0 0 0-1-1H7a1 1 0 0 0-1 1H2.5zm3 4a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 .5-.5zM8 5a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7A.5.5 0 0 1 8 5zm3 .5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 1 0z"/>
+                                    </svg>
+                                 </a>
                             </td>
                         </tr>
                     </c:forEach>
                 </tbody>
             </table>
+              <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.0/jquery.mask.js"></script>
             <div class="footer">
                 Em caso de problemas contactar o administrador:
                 <a href="mailto:${configuracao.email}">
