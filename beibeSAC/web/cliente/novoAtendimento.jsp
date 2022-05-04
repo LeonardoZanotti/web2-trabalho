@@ -20,7 +20,6 @@
         <link rel="stylesheet" type="text/css" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
         <link rel="stylesheet" href="${pageContext.request.contextPath}/index.css" /> 
-        <script src="${pageContext.request.contextPath}/js/jquery-mask.min.js"></script>
     </head>
     <body>
         <c:if test="${empty sessionScope.logado}">
